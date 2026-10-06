@@ -18,9 +18,11 @@
       <h1 class="mb-4">خوش آمدید</h1>
 
       <form method="post" action="{% url 'logout' %}">
-        {% csrf_token %}
+        {% csrf_token %} {% if user.is_authenticated %}
 
         <button type="submit" class="btn btn-danger">خروج</button>
+
+        {% endif %}
       </form>
     </div>
   </body>
