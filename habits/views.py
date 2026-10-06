@@ -20,5 +20,5 @@ def create_habit(request):
         form = HabitForm()
 
     return render(
-        request, 'habits/create_habit.html', {'form : form'}
+        request, 'create_habit.html', {'form': form}
     )
