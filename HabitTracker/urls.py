@@ -22,4 +22,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('accounts.urls')),
     path('home/', views.home, name='home'),
+    path('', include('habits.urls')),
 ]

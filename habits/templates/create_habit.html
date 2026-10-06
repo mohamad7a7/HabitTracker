@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <title>ساخت Habit</title>
+  </head>
+
+  <body>
+    <h1>ساخت Habit جدید</h1>
+
+    <form method="POST">
+      {% csrf_token %} {{ form.as_p }}
+
+      <button type="submit">ساخت Habit</button>
+    </form>
+  </body>
+</html>
