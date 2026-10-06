@@ -3,11 +3,14 @@ from django.db import models
 
 
 class Habit(models.Model):
-
-    class Frequency(models.TextChoices):
-        ONCE = 'ONCE', 'یک‌بار'
-        DAILY = 'DAILY', 'روزانه'
-        MONTHLY = 'MONTHLY', 'ماهانه'
+    FRQ_D = 'D'
+    FRQ_O = 'O'
+    FRQ_M = 'M'
+    FRQ_CHOICES = [
+        (FRQ_O, 'یکبار'),
+        (FRQ_M, 'ماهانه'),
+        (FRQ_D, 'روزانه'),
+    ]
 
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
@@ -19,7 +22,7 @@ class Habit(models.Model):
 
     frequency = models.CharField(
         max_length=10,
-        choices=Frequency.choices
+        choices=FRQ_CHOICES
     )
 
     start_date = models.DateField(
