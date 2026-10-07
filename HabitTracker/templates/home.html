@@ -20,11 +20,14 @@
       <h2>Habit های من</h2>
 
       <div>
+        {% for habit in habits %}
+
         <h3>{{ habit.title }}</h3>
 
         <p>نوع: {{ habit.get_frequency_display }}</p>
-
         <p>ساعت: {{ habit.time }}</p>
+
+        {% endfor %}
       </div>
 
       <form method="post" action="{% url 'logout' %}">
