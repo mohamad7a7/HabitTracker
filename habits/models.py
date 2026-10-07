@@ -21,7 +21,7 @@ class Habit(models.Model):
     title = models.CharField(max_length=100)
 
     frequency = models.CharField(
-        max_length=10,
+        max_length=1,
         choices=FRQ_CHOICES
     )
 
