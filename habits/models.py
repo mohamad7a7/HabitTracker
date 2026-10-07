@@ -22,7 +22,8 @@ class Habit(models.Model):
 
     frequency = models.CharField(
         max_length=1,
-        choices=FRQ_CHOICES
+        choices=FRQ_CHOICES,
+        default='D'
     )
 
     start_date = models.DateField(
