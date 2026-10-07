@@ -17,8 +17,13 @@
     <div class="container mt-5">
       <h1 class="mb-4">خوش آمدید</h1>
 
-      {% for habit in habits %} {{ habit.title }} {% endfor %}
+      <h2>Habit های من</h2>
 
+      {% for habit in habits %}
+
+      <p>{{ habit.title }}</p>
+
+      {% endfor %}
       <form method="post" action="{% url 'logout' %}">
         {% csrf_token %} {% if user.is_authenticated %}
 

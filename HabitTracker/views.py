@@ -8,6 +8,6 @@ def home(request):
         habits = request.user.habits.all()
 
     else:
-        habits = Habit.objects.none()
+        habits = Habit.objects.none
 
     return render(request, 'home.html', {'habits': habits})
