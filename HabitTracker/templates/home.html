@@ -19,11 +19,14 @@
 
       <h2>Habit های من</h2>
 
-      {% for habit in habits %}
+      <div>
+        <h3>{{ habit.title }}</h3>
 
-      <p>{{ habit.title }}</p>
+        <p>نوع: {{ habit.get_frequency_display }}</p>
 
-      {% endfor %}
+        <p>ساعت: {{ habit.time }}</p>
+      </div>
+
       <form method="post" action="{% url 'logout' %}">
         {% csrf_token %} {% if user.is_authenticated %}
 
