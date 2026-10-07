@@ -19,22 +19,32 @@
 
       <h2>Habit های من</h2>
 
-      <div>
-        {% for habit in habits %}
+      {% for habit in habits %}
 
+      <div>
         <h3>{{ habit.title }}</h3>
 
-        <p>نوع: {{ habit.get_frequency_display }}</p>
+        {% if habit.frequency == 'O' %}
+
+        <p>تاریخ: {{ habit.once_date }}</p>
+
+        {% elif habit.frequency == 'D' %}
+
         <p>ساعت: {{ habit.time }}</p>
 
-        {% endfor %}
+        {% elif habit.frequency == 'M' %}
+
+        <p>روز ماه: {{ habit.day_of_month }}</p>
+
+        {% endif %}
       </div>
+
+      {% endfor %}
 
       <form method="post" action="{% url 'logout' %}">
         {% csrf_token %} {% if user.is_authenticated %}
 
         <button type="submit" class="btn btn-danger">خروج</button>
-
         {% endif %}
       </form>
     </div>
