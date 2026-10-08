@@ -14,9 +14,7 @@
   </head>
 
   <body>
-
     <div class="container mt-5">
-
       <h1 class="mb-4">خوش آمدید</h1>
 
       <h2>Habit های من</h2>
@@ -29,22 +27,23 @@
         {% if habit.frequency == 'O' %}
 
         <p>تاریخ: {{ habit.once_date }}</p>
-
+        <a href="{% url 'edit_habit' habit.id %}"> ویرایش</a>
         {% elif habit.frequency == 'D' %}
 
         <p>ساعت: {{ habit.time }}</p>
+        <a href="{% url 'edit_habit' habit.id %}"> ویرایش</a>
 
         {% elif habit.frequency == 'M' %}
 
         <p>روز ماه: {{ habit.day_of_month }}</p>
-
+        <a href="{% url 'edit_habit' habit.id %}"> ویرایش</a>
         {% endif %}
 
-          <form method="POST" action="{% url 'delete_habit' habit.id %}">
+        <form method="POST" action="{% url 'delete_habit' habit.id %}">
+          {% csrf_token %}
 
-            {% csrf_token %}
-
-            <button type="submit">حذف</button>
+          <button type="submit">حذف</button>
+        </form>
       </div>
 
       {% endfor %}
@@ -54,7 +53,6 @@
 
         <button type="submit" class="btn btn-danger">خروج</button>
         {% endif %}
-
       </form>
     </div>
   </body>
