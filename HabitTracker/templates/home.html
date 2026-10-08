@@ -27,15 +27,19 @@
         {% if habit.frequency == 'O' %}
 
         <p>تاریخ: {{ habit.once_date }}</p>
+
         <a href="{% url 'edit_habit' habit.id %}"> ویرایش</a>
+
         {% elif habit.frequency == 'D' %}
 
         <p>ساعت: {{ habit.time }}</p>
+
         <a href="{% url 'edit_habit' habit.id %}"> ویرایش</a>
 
         {% elif habit.frequency == 'M' %}
 
         <p>روز ماه: {{ habit.day_of_month }}</p>
+
         <a href="{% url 'edit_habit' habit.id %}"> ویرایش</a>
         {% endif %}
 

@@ -41,6 +41,7 @@ def delete_habit(request, habit_id):
 
 @login_required
 def edit_habit(request, habit_id):
+
     habit = get_object_or_404(
         Habit,
         id=habit_id,
@@ -59,6 +60,6 @@ def edit_habit(request, habit_id):
 
     return render(
         request,
-        'habits/edit_habit.html',
+        'edit_habit.html',
         {'form': form}
     )
