@@ -16,22 +16,21 @@ class HabitForm(forms.ModelForm):
             'day_of_month',
         ]
 
+    def clean(self):
 
-  def clean(self):
+        cleaned_data = super().clean()
 
-      cleaned_data = super().clean()
+        frequency = cleaned_data.get('frequency')
 
-      frequency = cleaned_data.get('frequency')
+        if frequency == Habit.FRQ_O:
+            cleaned_data['start_date'] = None
+            cleaned_data['day_of_month'] = None
 
-      if frequency == Habit.FRQ_O:
-          cleaned_data['start_date'] = None
-          cleaned_data['day_of_month'] = None
+        elif frequency == Habit.FRQ_D:
+            cleaned_data['once_date'] = None
+            cleaned_data['day_of_month'] = None
 
-      elif frequency == Habit.FRQ_D:
-          cleaned_data['once_date'] = None
-          cleaned_data['day_of_month'] = None
+        elif frequency == Habit.FRQ_M:
+            cleaned_data['once_date'] = None
 
-      elif frequency == Habit.FRQ_M:
-          cleaned_data['once_date'] = None
-
-      return cleaned_data
+        return cleaned_data
