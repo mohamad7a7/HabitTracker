@@ -1,6 +1,7 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .forms import HabitForm
+from .models import Habit
 
 
 @login_required
@@ -22,3 +23,17 @@ def create_habit(request):
     return render(
         request, 'create_habit.html', {'form': form}
     )
+
+
+@login_required
+def delete_habit(request, habit_id):
+
+    habit = get_object_or_404(
+        Habit,
+        id=habit_id,
+        user=request.user
+    )
+
+    if request.method == 'POST':
+        habit.delete()
+        return redirect('home')
