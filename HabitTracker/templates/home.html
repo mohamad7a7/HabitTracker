@@ -14,7 +14,9 @@
   </head>
 
   <body>
+
     <div class="container mt-5">
+
       <h1 class="mb-4">خوش آمدید</h1>
 
       <h2>Habit های من</h2>
@@ -37,6 +39,12 @@
         <p>روز ماه: {{ habit.day_of_month }}</p>
 
         {% endif %}
+
+          <form method="POST" action="{% url 'delete_habit' habit.id %}">
+
+            {% csrf_token %}
+
+            <button type="submit">حذف</button>
       </div>
 
       {% endfor %}
@@ -46,6 +54,7 @@
 
         <button type="submit" class="btn btn-danger">خروج</button>
         {% endif %}
+
       </form>
     </div>
   </body>
