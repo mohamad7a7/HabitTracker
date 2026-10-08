@@ -60,5 +60,5 @@ def edit_habit(request, habit_id):
     return render(
         request,
         'habits/edit_habit.html',
-        {'form : form'}
+        {'form': form}
     )
