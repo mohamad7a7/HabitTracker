@@ -20,4 +20,10 @@ urlpatterns = [
         views.edit_habit,
         name='edit_habit'
     ),
+
+    path(
+        '<int:habit_id>/toggle-status/',
+        views.toggle_habit_status,
+        name='toggle_habit_status'
+    ),
 ]
