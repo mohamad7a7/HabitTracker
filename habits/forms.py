@@ -27,13 +27,6 @@ class HabitForm(forms.ModelForm):
         cleaned_data = super().clean()
         frequency = cleaned_data.get('frequency')
 
-        # ساعت برای هر سه نوع Habit الزامی است
-        if not cleaned_data.get('time'):
-            self.add_error(
-                'time',
-                'وارد کردن ساعت انجام الزامی است.'
-            )
-
         if frequency == Habit.FRQ_O:
             cleaned_data['start_date'] = None
             cleaned_data['day_of_month'] = None
