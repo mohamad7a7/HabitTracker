@@ -16,6 +16,13 @@ class HabitForm(forms.ModelForm):
             'day_of_month',
         ]
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.fields['time'].error_messages['required'] = (
+            'وارد کردن ساعت انجام الزامی است.'
+        )
+
     def clean(self):
         cleaned_data = super().clean()
         frequency = cleaned_data.get('frequency')
