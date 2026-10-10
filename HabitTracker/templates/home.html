@@ -28,20 +28,28 @@
 
         <p>تاریخ: {{ habit.once_date }}</p>
 
-        <a href="{% url 'edit_habit' habit.id %}"> ویرایش</a>
-
         {% elif habit.frequency == 'D' %}
 
         <p>ساعت: {{ habit.time }}</p>
-
-        <a href="{% url 'edit_habit' habit.id %}"> ویرایش</a>
 
         {% elif habit.frequency == 'M' %}
 
         <p>روز ماه: {{ habit.day_of_month }}</p>
 
-        <a href="{% url 'edit_habit' habit.id %}"> ویرایش</a>
         {% endif %}
+        <a href="{% url 'edit_habit' habit.id %}"> ویرایش</a>
+
+        <p>
+          وضعیت: {% if habit.is_active %} فعال {% else %} غیرفعال {% endif %}
+        </p>
+
+        <form method="post" action="{% url 'toggle_habit_status' habit.id %}">
+          {% csrf_token %} {% if habit.is_active %}
+          <button type="submit">غیرفعال کردن</button>
+          {% else %}
+          <button type="submit">فعال کردن</button>
+          {% endif %}
+        </form>
 
         <form method="POST" action="{% url 'delete_habit' habit.id %}">
           {% csrf_token %}
