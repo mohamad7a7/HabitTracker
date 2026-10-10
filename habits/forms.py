@@ -32,5 +32,6 @@ class HabitForm(forms.ModelForm):
 
         elif frequency == Habit.FRQ_M:
             cleaned_data['once_date'] = None
+            cleaned_data['start_date'] = None
 
         return cleaned_data
