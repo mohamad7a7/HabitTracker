@@ -51,10 +51,18 @@ class HabitForm(forms.ModelForm):
             cleaned_data['once_date'] = None
             cleaned_data['start_date'] = None
 
-            if not cleaned_data.get('day_of_month'):
-                self.add_error(
-                    'day_of_month',
-                    'انتخاب روز ماه الزامی است.'
-                )
+            if 'day_of_month' in cleaned_data:
+                day_of_month = cleaned_data.get('day_of_month')
 
+                if day_of_month is None:
+                    self.add_error(
+                        'day_of_month',
+                        'وارد کردن روز ماه الزامی است.'
+                    )
+
+        elif not 1 <= day_of_month <= 31:
+            self.add_error(
+                'day_of_month',
+                'روز ماه باید بین 1 تا 31 باشد.'
+            )
         return cleaned_data
