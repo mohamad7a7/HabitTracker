@@ -15,6 +15,7 @@ class Habit(models.Model):
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
+        db_index=True,
         related_name='habits'
     )
 
@@ -23,7 +24,7 @@ class Habit(models.Model):
     frequency = models.CharField(
         max_length=1,
         choices=FRQ_CHOICES,
-        default='D'
+        default=FRQ_D,
     )
 
     start_date = models.DateField(
