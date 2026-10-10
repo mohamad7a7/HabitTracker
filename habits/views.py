@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.http import require_POST
 from .forms import HabitForm
 from .models import Habit
 
@@ -63,3 +64,18 @@ def edit_habit(request, habit_id):
         'edit_habit.html',
         {'form': form}
     )
+
+
+@login_required
+@require_POST
+def toggle_habit_status(request, habit_id):
+    habit = get_object_or_404(
+        Habit,
+        id=habit_id,
+        user=request.user
+    )
+
+    habit.is_active = not habit.is_active
+    habit.save(update_fields=['is_active'])
+
+    return redirect('home')
