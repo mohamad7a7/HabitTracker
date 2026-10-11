@@ -19,4 +19,6 @@ def home(request):
             date=today
         ).first()
 
+        habit.checkin_history = habit.checkins.order_by('-date')
+
     return render(request, 'home.html', {'habits': habits})
