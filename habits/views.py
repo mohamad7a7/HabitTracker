@@ -4,6 +4,8 @@ from django.views.decorators.http import require_POST
 from .forms import HabitForm
 from .models import Habit
 
+'''define the rules for creating a habit'''
+
 
 @login_required
 def create_habit(request):

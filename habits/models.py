@@ -1,6 +1,8 @@
 from django.conf import settings
 from django.db import models
 
+'''define the tables of habit app and realition with user app'''
+
 
 class Habit(models.Model):
     FRQ_D = 'D'

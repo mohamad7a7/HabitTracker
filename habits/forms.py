@@ -2,8 +2,10 @@ from django import forms
 from .models import Habit
 
 
-class HabitForm(forms.ModelForm):
+'''define the form of creating a habit and rules of each field'''
 
+
+class HabitForm(forms.ModelForm):
     class Meta:
         model = Habit
 

@@ -5,6 +5,8 @@ from django.views.decorators.http import require_POST
 from habits.models import Habit
 from .models import CheckIn
 
+'''define the rules of changing a habit status to active or not active'''
+
 
 @login_required
 @require_POST

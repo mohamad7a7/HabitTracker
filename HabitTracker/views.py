@@ -4,6 +4,9 @@ from django.utils import timezone
 from checkins.models import CheckIn
 
 
+'''define the rules of home page if user loged in or not'''
+
+
 def home(request):
 
     if request.user.is_authenticated:

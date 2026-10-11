@@ -2,6 +2,9 @@ from django.db import models
 from habits.models import Habit
 
 
+'''define the table of checkin app and realations with habit app'''
+
+
 class CheckIn(models.Model):
     habit = models.ForeignKey(
         Habit,

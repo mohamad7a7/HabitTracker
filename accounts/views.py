@@ -3,6 +3,8 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.shortcuts import render, redirect
 from .forms import RegisterForm
 
+''' define the rulse of register a user'''
+
 
 def register(request):
     if request.method == 'POST':
@@ -14,6 +16,9 @@ def register(request):
     return render(request, 'accounts/register.html', {'form': form})
 
 
+'''define the rules of login a user'''
+
+
 def login_view(request):
     if request.method == 'POST':
         form = AuthenticationForm(request, data=request.POST)
@@ -23,6 +28,9 @@ def login_view(request):
     else:
         form = AuthenticationForm()
     return render(request, 'accounts/login.html', {'form': form})
+
+
+'''define the rules of log out a user'''
 
 
 def logout_view(request):
