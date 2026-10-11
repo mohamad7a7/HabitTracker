@@ -22,3 +22,11 @@ class CheckIn(models.Model):
                 name='unique_checkin_per_habit_date'
             )
         ]
+
+    def __str__(self):
+        if self.is_done:
+            status = 'انجام شده'
+        else:
+            status = 'انجام نشده'
+
+        return f'{self.habit.title} - {self.date} - {status}'
