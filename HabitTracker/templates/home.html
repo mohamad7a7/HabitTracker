@@ -75,6 +75,21 @@
       <p>وضعیت امروز: انجام نشده ❌</p>
       {% endif %} {% else %}
       <p>وضعیت امروز: هنوز ثبت نشده</p>
+      {% endif %}
+
+      <h4>سابقه‌ی انجام عادت</h4>
+
+      {% if habit.checkin_history %}
+      <ul>
+        {% for checkin in habit.checkin_history %}
+        <li>
+          {{ checkin.date|date:"Y/m/d" }} - {% if checkin.is_done %} انجام شده
+          ✅ {% else %} انجام نشده ❌ {% endif %}
+        </li>
+        {% endfor %}
+      </ul>
+      {% else %}
+      <p>هنوز سابقه‌ای ثبت نشده است.</p>
       {% endif %} {% endfor %}
 
       <form method="post" action="{% url 'logout' %}">
