@@ -3,21 +3,72 @@
 <html lang="fa" dir="rtl">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- فونت فارسی وزیرمتن -->
     <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.rtl.min.css"
+      href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css"
       rel="stylesheet"
+      type="text/css"
     />
-    <title>ساخت Habit</title>
+
+    <!-- استایل اختصاصی صفحه ساخت عادت -->
+    <link rel="stylesheet" href="{% static 'habits/css/create_habit.css' %}" />
+
+    <title>ساخت عادت جدید | Habit Tracker</title>
   </head>
 
-  <body>
-    <h1>ساخت Habit جدید</h1>
+  <body class="create-habit-page">
+    <main class="create-habit-container">
+      <!-- سربرگ صفحه -->
+      <header class="create-habit-header">
+        <a href="{% url 'home' %}" class="brand">
+          <span class="brand-icon">H</span>
+          <span class="brand-name">Habit Tracker</span>
+        </a>
 
-    <form method="POST" novalidate>
-      {% csrf_token %} {{ form.as_p }}
+        <a href="{% url 'home' %}" class="back-link"> بازگشت به صفحه اصلی </a>
+      </header>
 
-      <button type="submit">ساخت Habit</button>
-    </form>
+      <!-- معرفی فرم -->
+      <section class="page-intro">
+        <p class="section-eyebrow">مدیریت عادت‌ها</p>
+
+        <h1 class="page-title">ساخت عادت جدید</h1>
+
+        <p class="page-description">
+          عادت جدیدت رو تعریف کن و قدم بعدی رو برای رسیدن به هدفت بردار.
+        </p>
+      </section>
+
+      <!-- کارت فرم ساخت عادت -->
+      <section class="create-habit-card">
+        <div class="form-heading">
+          <h2 class="form-title">اطلاعات عادت</h2>
+
+          <p class="form-description">
+            اطلاعات موردنیاز رو در فرم زیر وارد کن.
+          </p>
+        </div>
+
+        <form method="POST" novalidate class="create-habit-form">
+          {% csrf_token %} {{ form.as_p }}
+
+          <div class="form-actions">
+            <button type="submit" class="submit-button">ساخت عادت</button>
+
+            <a href="{% url 'home' %}" class="cancel-link"> انصراف </a>
+          </div>
+        </form>
+      </section>
+
+      <!-- توضیح پایین صفحه -->
+      <footer class="create-habit-footer">
+        <p>قدم‌های کوچک، تغییرات بزرگ می‌سازند.</p>
+      </footer>
+    </main>
+
+    <!-- اسکریپت قبلی صفحه؛ برای حفظ رفتار فعلی -->
     <script src="{% static 'habits/js/create_habit.js' %}"></script>
   </body>
 </html>
