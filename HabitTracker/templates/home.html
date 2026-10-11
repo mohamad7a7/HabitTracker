@@ -43,6 +43,13 @@
           وضعیت: {% if habit.is_active %} فعال {% else %} غیرفعال {% endif %}
         </p>
 
+        {% if user.is_authenticated %}
+        <form method="post" action="{% url 'toggle_checkin' habit.id %}">
+          {% csrf_token %}
+          <button type="submit">ثبت انجام امروز</button>
+        </form>
+        {% endif %}
+
         <form method="post" action="{% url 'toggle_habit_status' habit.id %}">
           {% csrf_token %} {% if habit.is_active %}
           <button type="submit">غیرفعال کردن</button>
