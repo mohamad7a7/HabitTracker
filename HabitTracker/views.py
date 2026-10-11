@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from habits.models import Habit
+from django.utils import timezone
+from checkins.models import CheckIn
 
 
 def home(request):
@@ -9,5 +11,12 @@ def home(request):
 
     else:
         habits = Habit.objects.none()
+
+    today = timezone.localdate()
+
+    for habit in habits:
+        habit.today_checkin = habit.checkins.filter(
+            date=today
+        ).first()
 
     return render(request, 'home.html', {'habits': habits})
