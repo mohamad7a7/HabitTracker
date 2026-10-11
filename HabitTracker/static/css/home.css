@@ -1,0 +1,698 @@
+/* ==============================
+   1. رنگ‌ها و تنظیمات عمومی
+============================== */
+
+:root {
+  --primary: #6c63ff;
+  --primary-dark: #554bea;
+  --secondary: #8b5cf6;
+
+  --background: #f5f6ff;
+  --surface: #ffffff;
+
+  --text: #252642;
+  --text-muted: #777b95;
+
+  --border: #e9eaf5;
+
+  --success: #16845b;
+  --success-bg: #e7f8ef;
+
+  --danger: #d83f52;
+  --danger-bg: #fff0f1;
+
+  --warning: #a76a0b;
+  --warning-bg: #fff5df;
+
+  --radius: 18px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body.home-page {
+  margin: 0;
+  min-height: 100vh;
+
+  font-family: Tahoma, "Segoe UI", sans-serif;
+  font-size: 15px;
+  line-height: 1.8;
+  color: var(--text);
+
+  background:
+    radial-gradient(
+      circle at top right,
+      rgba(139, 92, 246, 0.1),
+      transparent 32%
+    ),
+    var(--background);
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:focus-visible,
+a:focus-visible {
+  outline: 3px solid rgba(108, 99, 255, 0.35);
+  outline-offset: 3px;
+}
+
+/* ==============================
+   2. عرض کلی صفحه
+============================== */
+
+.page-container {
+  width: min(1120px, calc(100% - 32px));
+  margin-inline: auto;
+}
+
+.main-content {
+  padding-top: 46px;
+  padding-bottom: 64px;
+}
+
+/* ==============================
+   3. سربرگ صفحه
+============================== */
+
+.site-header {
+  background: rgba(255, 255, 255, 0.92);
+  border-bottom: 1px solid var(--border);
+  box-shadow: 0 4px 24px rgba(45, 48, 95, 0.04);
+}
+
+.header-content {
+  min-height: 82px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.site-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brand-icon {
+  width: 44px;
+  height: 44px;
+
+  display: grid;
+  place-items: center;
+
+  color: #ffffff;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+
+  border-radius: 14px;
+  font-size: 22px;
+  font-weight: bold;
+
+  box-shadow: 0 7px 18px rgba(108, 99, 255, 0.22);
+}
+
+.brand-name {
+  font-size: 19px;
+  font-weight: bold;
+  letter-spacing: 0.2px;
+}
+
+.header-user {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.welcome-text {
+  margin: 0;
+  color: var(--text-muted);
+}
+
+.logout-form {
+  margin: 0;
+}
+
+/* ==============================
+   4. دکمه‌های عمومی
+============================== */
+
+.button {
+  min-height: 40px;
+  padding: 8px 15px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+
+  border: 1px solid transparent;
+  border-radius: 10px;
+
+  font-size: 13px;
+  font-weight: bold;
+  line-height: 1.6;
+  text-align: center;
+  text-decoration: none;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+}
+
+.button:hover {
+  transform: translateY(-2px);
+}
+
+.button-logout {
+  color: var(--danger);
+  background: var(--danger-bg);
+  border-color: #ffdcdf;
+}
+
+.button-logout:hover {
+  color: #ffffff;
+  background: var(--danger);
+}
+
+/* ==============================
+   5. معرفی صفحه
+============================== */
+
+.page-intro {
+  margin-bottom: 32px;
+}
+
+.section-eyebrow {
+  margin: 0 0 8px;
+
+  color: var(--primary);
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.page-title {
+  margin: 0;
+
+  font-size: clamp(26px, 4vw, 36px);
+  font-weight: bold;
+  line-height: 1.5;
+  letter-spacing: -0.7px;
+}
+
+.page-description {
+  margin: 10px 0 0;
+
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+/* ==============================
+   6. فهرست عادت‌ها
+============================== */
+
+.habit-list {
+  display: grid;
+
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
+
+  gap: 24px;
+  align-items: start;
+}
+
+/* ==============================
+   7. کارت هر عادت
+============================== */
+
+.habit-card {
+  min-width: 0;
+  padding: 24px;
+
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+
+  box-shadow: 0 8px 28px rgba(45, 48, 95, 0.05);
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.habit-card:hover {
+  transform: translateY(-4px);
+
+  border-color: #d9d6ff;
+
+  box-shadow: 0 16px 38px rgba(45, 48, 95, 0.09);
+}
+
+.habit-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+}
+
+.habit-heading {
+  min-width: 0;
+
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.habit-title {
+  margin: 0;
+
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 1.6;
+
+  overflow-wrap: anywhere;
+}
+
+/* ==============================
+   8. برچسب نوع عادت
+============================== */
+
+.frequency-badge,
+.status-badge {
+  flex-shrink: 0;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 4px 10px;
+  border-radius: 8px;
+
+  font-size: 11px;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+.frequency-once {
+  color: #8056c9;
+  background: #f2eaff;
+}
+
+.frequency-daily {
+  color: #2762bb;
+  background: #e9f2ff;
+}
+
+.frequency-monthly {
+  color: #a56a0b;
+  background: #fff4dc;
+}
+
+.status-active {
+  color: var(--success);
+  background: var(--success-bg);
+}
+
+.status-inactive {
+  color: var(--danger);
+  background: var(--danger-bg);
+}
+
+/* ==============================
+   9. جزئیات عادت
+============================== */
+
+.habit-details {
+  padding: 18px 0;
+}
+
+.detail-item {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+
+  margin: 0;
+  padding: 9px 12px;
+
+  background: #f8f8ff;
+  border-radius: 10px;
+}
+
+.detail-label {
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+.detail-value {
+  color: var(--text);
+  font-size: 13px;
+  font-weight: bold;
+  overflow-wrap: anywhere;
+}
+
+/* ==============================
+   10. دکمه‌های مدیریت عادت
+============================== */
+
+.habit-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 9px;
+
+  padding-bottom: 22px;
+  border-bottom: 1px solid var(--border);
+}
+
+.action-form {
+  display: flex;
+  margin: 0;
+}
+
+.button-edit {
+  color: #ffffff;
+  background: var(--primary);
+}
+
+.button-edit:hover {
+  color: #ffffff;
+  background: var(--primary-dark);
+  box-shadow: 0 5px 14px rgba(108, 99, 255, 0.22);
+}
+
+.button-checkin {
+  color: #ffffff;
+  background: var(--success);
+}
+
+.button-checkin:hover {
+  color: #ffffff;
+  background: #116d4a;
+}
+
+.button-status {
+  color: #6b55bb;
+  background: #f1edff;
+  border-color: #e3dcff;
+}
+
+.button-status:hover {
+  color: #ffffff;
+  background: var(--secondary);
+}
+
+.button-delete {
+  color: var(--danger);
+  background: var(--danger-bg);
+  border-color: #ffdcdf;
+}
+
+.button-delete:hover {
+  color: #ffffff;
+  background: var(--danger);
+}
+
+/* ==============================
+   11. وضعیت امروز
+============================== */
+
+.today-section {
+  padding: 20px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.subsection-title {
+  margin: 0 0 12px;
+
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.today-status {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+
+  width: fit-content;
+  margin: 0;
+
+  padding: 7px 12px;
+  border-radius: 9px;
+
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.status-icon {
+  display: inline-grid;
+  place-items: center;
+
+  width: 22px;
+  height: 22px;
+
+  border-radius: 50%;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.today-done {
+  color: var(--success);
+  background: var(--success-bg);
+}
+
+.today-done .status-icon {
+  color: #ffffff;
+  background: var(--success);
+}
+
+.today-not-done {
+  color: var(--danger);
+  background: var(--danger-bg);
+}
+
+.today-not-done .status-icon {
+  color: #ffffff;
+  background: var(--danger);
+}
+
+.today-not-recorded {
+  color: var(--warning);
+  background: var(--warning-bg);
+}
+
+/* ==============================
+   12. سابقه انجام عادت
+============================== */
+
+.history-section {
+  padding-top: 20px;
+}
+
+.history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+
+  margin: 0;
+  padding: 0;
+
+  list-style: none;
+}
+
+.history-item {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+
+  padding: 10px 12px;
+
+  background: #fafaff;
+  border: 1px solid #f0f0fa;
+  border-radius: 10px;
+}
+
+.history-date {
+  color: var(--text-muted);
+  font-size: 12px;
+  direction: ltr;
+  text-align: left;
+}
+
+.history-result {
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.history-done {
+  color: var(--success);
+}
+
+.history-not-done {
+  color: var(--danger);
+}
+
+.empty-history {
+  margin: 0;
+  padding: 14px;
+
+  color: var(--text-muted);
+  background: #f8f8ff;
+  border-radius: 10px;
+
+  font-size: 13px;
+}
+
+/* ==============================
+   13. حالت بدون عادت
+============================== */
+
+.empty-state {
+  grid-column: 1 / -1;
+
+  padding: 48px 24px;
+
+  text-align: center;
+
+  background: var(--surface);
+  border: 1px dashed #d8d5f5;
+  border-radius: var(--radius);
+}
+
+.empty-title {
+  margin: 0 0 8px;
+  font-size: 20px;
+}
+
+.empty-description {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+/* ==============================
+   14. نمایش در موبایل
+============================== */
+
+@media (max-width: 600px) {
+  .page-container {
+    width: calc(100% - 24px);
+  }
+
+  .header-content {
+    min-height: 74px;
+    gap: 10px;
+  }
+
+  .brand-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 12px;
+    font-size: 19px;
+  }
+
+  .brand-name {
+    font-size: 15px;
+  }
+
+  .header-user {
+    gap: 8px;
+  }
+
+  .welcome-text {
+    display: none;
+  }
+
+  .button-logout {
+    min-height: 36px;
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+
+  .main-content {
+    padding-top: 30px;
+    padding-bottom: 40px;
+  }
+
+  .page-intro {
+    margin-bottom: 24px;
+  }
+
+  .page-description {
+    font-size: 13px;
+  }
+
+  .habit-list {
+    gap: 16px;
+  }
+
+  .habit-card {
+    padding: 18px;
+    border-radius: 15px;
+  }
+
+  .habit-card-header {
+    gap: 8px;
+  }
+
+  .habit-title {
+    font-size: 18px;
+  }
+
+  .habit-actions {
+    gap: 8px;
+  }
+
+  .button {
+    min-height: 38px;
+    padding: 7px 10px;
+    font-size: 12px;
+  }
+
+  .history-item {
+    align-items: flex-start;
+  }
+}
+
+/* ==============================
+   15. کاهش حرکت برای دسترس‌پذیری
+============================== */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
