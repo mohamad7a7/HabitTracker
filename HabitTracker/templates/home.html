@@ -65,7 +65,13 @@
         </form>
       </div>
 
-      {% endfor %}
+      {% if habit.today_checkin %} {% if habit.today_checkin.is_done %}
+      <p>وضعیت امروز: انجام شده ✅</p>
+      {% else %}
+      <p>وضعیت امروز: انجام نشده ❌</p>
+      {% endif %} {% else %}
+      <p>وضعیت امروز: هنوز ثبت نشده</p>
+      {% endif %} {% endfor %}
 
       <form method="post" action="{% url 'logout' %}">
         {% csrf_token %} {% if user.is_authenticated %}
