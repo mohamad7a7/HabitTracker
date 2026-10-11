@@ -1,0 +1,506 @@
+/* ==============================
+   1. رنگ‌ها و تنظیمات عمومی
+============================== */
+
+:root {
+  --primary: #6c63ff;
+  --primary-dark: #554bea;
+  --secondary: #8b5cf6;
+
+  --background: #f5f6ff;
+  --surface: #ffffff;
+
+  --text: #252642;
+  --text-muted: #777b95;
+
+  --border: #e9eaf5;
+
+  --danger: #d83f52;
+  --danger-bg: #fff0f1;
+
+  --radius: 20px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body.edit-habit-page {
+  min-height: 100vh;
+  margin: 0;
+  padding: 32px 16px;
+
+  font-family: "Vazirmatn", sans-serif;
+  font-size: 15px;
+  line-height: 1.8;
+  color: var(--text);
+
+  background:
+    radial-gradient(
+      circle at top right,
+      rgba(139, 92, 246, 0.13),
+      transparent 35%
+    ),
+    radial-gradient(
+      circle at bottom left,
+      rgba(108, 99, 255, 0.09),
+      transparent 30%
+    ),
+    var(--background);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button,
+a,
+input,
+select,
+textarea {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid rgba(108, 99, 255, 0.3);
+  outline-offset: 3px;
+}
+
+/* ==============================
+   2. محدوده اصلی صفحه
+============================== */
+
+.edit-habit-container {
+  width: 100%;
+  max-width: 760px;
+  margin-inline: auto;
+}
+
+/* ==============================
+   3. سربرگ صفحه
+============================== */
+
+.edit-habit-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+
+  margin-bottom: 45px;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 11px;
+}
+
+.brand-icon {
+  width: 44px;
+  height: 44px;
+
+  display: grid;
+  place-items: center;
+
+  color: #ffffff;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+
+  border-radius: 14px;
+
+  font-size: 22px;
+  font-weight: bold;
+
+  box-shadow: 0 7px 18px rgba(108, 99, 255, 0.22);
+}
+
+.brand-name {
+  font-size: 19px;
+  font-weight: bold;
+}
+
+.back-link {
+  color: var(--text-muted);
+  font-size: 13px;
+
+  transition: color 0.2s ease;
+}
+
+.back-link:hover {
+  color: var(--primary);
+}
+
+/* ==============================
+   4. عنوان و معرفی صفحه
+============================== */
+
+.page-intro {
+  margin-bottom: 28px;
+}
+
+.section-eyebrow {
+  margin: 0 0 8px;
+
+  color: var(--primary);
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.page-title {
+  margin: 0;
+
+  font-size: clamp(26px, 4vw, 34px);
+  font-weight: bold;
+  line-height: 1.6;
+}
+
+.page-description {
+  margin: 10px 0 0;
+
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+/* ==============================
+   5. کارت فرم ویرایش
+============================== */
+
+.edit-habit-card {
+  padding: 32px;
+
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+
+  box-shadow: 0 18px 50px rgba(45, 48, 95, 0.07);
+}
+
+.form-heading {
+  margin-bottom: 28px;
+  padding-bottom: 20px;
+
+  border-bottom: 1px solid var(--border);
+}
+
+.form-title {
+  margin: 0;
+
+  font-size: 21px;
+  font-weight: bold;
+}
+
+.form-description {
+  margin: 7px 0 0;
+
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+/* ==============================
+   6. فرم Django
+============================== */
+
+.edit-habit-form {
+  width: 100%;
+}
+
+/*
+  در {{ form.as_p }} فیلدهای فرم Django
+  معمولاً داخل تگ‌های p قرار می‌گیرند.
+*/
+
+.edit-habit-form p {
+  margin: 0 0 22px;
+}
+
+/* عنوان فیلدها */
+
+.edit-habit-form label {
+  display: block;
+  margin-bottom: 8px;
+
+  color: var(--text);
+  font-size: 14px;
+  font-weight: bold;
+}
+
+/* فیلدهای متنی، تاریخ، ساعت و انتخاب‌ها */
+
+.edit-habit-form
+  input:not([type="hidden"]):not([type="checkbox"]):not([type="radio"]),
+.edit-habit-form select,
+.edit-habit-form textarea {
+  display: block;
+  width: 100%;
+  min-height: 48px;
+  padding: 10px 13px;
+
+  color: var(--text);
+  background: #fbfbff;
+
+  border: 1px solid #dedff0;
+  border-radius: 11px;
+
+  font-family: "Vazirmatn", sans-serif;
+  font-size: 14px;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.2s ease;
+}
+
+/* حالت انتخاب فیلد */
+
+.edit-habit-form
+  input:not([type="hidden"]):not([type="checkbox"]):not([type="radio"]):focus,
+.edit-habit-form select:focus,
+.edit-habit-form textarea:focus {
+  background: #ffffff;
+  border-color: var(--primary);
+  outline: none;
+
+  box-shadow: 0 0 0 4px rgba(108, 99, 255, 0.11);
+}
+
+/* گزینه‌های تیک‌زدنی و رادیویی */
+
+.edit-habit-form input[type="checkbox"],
+.edit-habit-form input[type="radio"] {
+  accent-color: var(--primary);
+}
+
+/* متن راهنمای فیلدها */
+
+.edit-habit-form .helptext {
+  display: block;
+  margin-top: 7px;
+
+  color: var(--text-muted);
+  font-size: 12px;
+  line-height: 1.9;
+}
+
+/* فهرست‌های راهنما */
+
+.edit-habit-form ul {
+  margin: 8px 0 0;
+  padding-right: 20px;
+
+  color: var(--text-muted);
+  font-size: 12px;
+}
+
+/* ==============================
+   7. خطاهای فرم
+============================== */
+
+.edit-habit-form .errorlist {
+  margin: 0 0 10px;
+  padding: 9px 12px;
+
+  color: var(--danger);
+  background: var(--danger-bg);
+
+  border: 1px solid #ffdcdf;
+  border-radius: 9px;
+
+  font-size: 12px;
+  line-height: 1.9;
+  list-style: none;
+}
+
+.edit-habit-form .errorlist li + li {
+  margin-top: 4px;
+}
+
+.edit-habit-form .errorlist.nonfield {
+  margin-bottom: 20px;
+}
+
+/* ==============================
+   8. دکمه ذخیره و انصراف
+============================== */
+
+.form-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+
+  margin-top: 30px;
+  padding-top: 24px;
+
+  border-top: 1px solid var(--border);
+}
+
+.submit-button {
+  min-height: 48px;
+  padding: 10px 24px;
+
+  color: #ffffff;
+  background: linear-gradient(135deg, var(--primary), #7b5cf0);
+
+  border: 0;
+  border-radius: 11px;
+
+  font-family: "Vazirmatn", sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+
+  cursor: pointer;
+
+  box-shadow: 0 7px 16px rgba(108, 99, 255, 0.2);
+
+  transition:
+    background 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+}
+
+.submit-button:hover {
+  background: linear-gradient(135deg, var(--primary-dark), #6948df);
+
+  box-shadow: 0 10px 22px rgba(108, 99, 255, 0.27);
+
+  transform: translateY(-2px);
+}
+
+.submit-button:active {
+  transform: translateY(0);
+}
+
+.cancel-link {
+  min-height: 44px;
+  padding: 8px 18px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  color: var(--text-muted);
+  background: #f4f4fb;
+
+  border: 1px solid var(--border);
+  border-radius: 10px;
+
+  font-size: 13px;
+
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.cancel-link:hover {
+  color: var(--primary);
+  background: #efedff;
+}
+
+/* ==============================
+   9. پایین صفحه
+============================== */
+
+.edit-habit-footer {
+  margin-top: 28px;
+  text-align: center;
+}
+
+.edit-habit-footer p {
+  margin: 0;
+
+  color: var(--text-muted);
+  font-size: 12px;
+}
+
+/* ==============================
+   10. نمایش در موبایل
+============================== */
+
+@media (max-width: 600px) {
+  body.edit-habit-page {
+    padding: 22px 14px;
+  }
+
+  .edit-habit-header {
+    margin-bottom: 32px;
+  }
+
+  .brand-icon {
+    width: 38px;
+    height: 38px;
+
+    border-radius: 12px;
+    font-size: 19px;
+  }
+
+  .brand-name {
+    font-size: 16px;
+  }
+
+  .back-link {
+    font-size: 12px;
+  }
+
+  .page-intro {
+    margin-bottom: 22px;
+  }
+
+  .page-description {
+    font-size: 13px;
+  }
+
+  .edit-habit-card {
+    padding: 22px 18px;
+    border-radius: 16px;
+  }
+
+  .form-title {
+    font-size: 19px;
+  }
+
+  .edit-habit-form p {
+    margin-bottom: 19px;
+  }
+
+  .form-actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .submit-button,
+  .cancel-link {
+    width: 100%;
+  }
+}
+
+/* ==============================
+   11. کاهش حرکت برای دسترس‌پذیری
+============================== */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+  }
+}
