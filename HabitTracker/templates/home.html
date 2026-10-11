@@ -46,7 +46,11 @@
         {% if user.is_authenticated %}
         <form method="post" action="{% url 'toggle_checkin' habit.id %}">
           {% csrf_token %}
-          <button type="submit">ثبت انجام امروز</button>
+
+          <button type="submit">
+            {% if habit.today_checkin and habit.today_checkin.is_done %} تغییر
+            به انجام‌نشده {% else %} ثبت انجام امروز {% endif %}
+          </button>
         </form>
         {% endif %}
 
