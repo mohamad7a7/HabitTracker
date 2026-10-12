@@ -103,3 +103,12 @@ textarea:focus-visible {
     animation-duration: 0.01ms !important;
   }
 }
+
+/* جلوگیری از رنگ‌گرفتن لحظه‌ای عناصر هنگام لمس */
+button,
+a,
+input,
+select,
+textarea {
+  -webkit-tap-highlight-color: transparent;
+}

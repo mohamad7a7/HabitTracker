@@ -1,48 +1,9 @@
 /* ==============================
-   1. رنگ‌ها و تنظیمات عمومی
+   1. پس‌زمینه و محدوده صفحه
 ============================== */
 
-:root {
-  --primary: #6c63ff;
-  --primary-dark: #554bea;
-  --secondary: #8b5cf6;
-
-  --background: #f5f6ff;
-  --surface: #ffffff;
-
-  --text: #252642;
-  --text-muted: #777b95;
-
-  --border: #e9eaf5;
-
-  --success: #16845b;
-  --success-bg: #e7f8ef;
-
-  --danger: #d83f52;
-  --danger-bg: #fff0f1;
-
-  --warning: #a76a0b;
-  --warning-bg: #fff5df;
-
-  --radius: 18px;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
 body.home-page {
-  margin: 0;
   min-height: 100vh;
-
-  font-family: "Vazirmatn", sans-serif;
-  font-size: 15px;
-  line-height: 1.8;
-  color: var(--text);
 
   background:
     radial-gradient(
@@ -52,28 +13,6 @@ body.home-page {
     ),
     var(--background);
 }
-
-button,
-input,
-textarea,
-select {
-  font: inherit;
-}
-
-button,
-a {
-  -webkit-tap-highlight-color: transparent;
-}
-
-button:focus-visible,
-a:focus-visible {
-  outline: 3px solid rgba(108, 99, 255, 0.35);
-  outline-offset: 3px;
-}
-
-/* ==============================
-   2. عرض کلی صفحه
-============================== */
 
 .page-container {
   width: min(1120px, calc(100% - 32px));
@@ -86,7 +25,7 @@ a:focus-visible {
 }
 
 /* ==============================
-   3. سربرگ صفحه
+   2. سربرگ صفحه خانه
 ============================== */
 
 .site-header {
@@ -149,7 +88,7 @@ a:focus-visible {
 }
 
 /* ==============================
-   4. دکمه‌های عمومی
+   3. دکمه‌های صفحه خانه
 ============================== */
 
 .button {
@@ -196,7 +135,7 @@ a:focus-visible {
 }
 
 /* ==============================
-   5. معرفی صفحه
+   4. معرفی صفحه
 ============================== */
 
 .page-intro {
@@ -228,7 +167,7 @@ a:focus-visible {
 }
 
 /* ==============================
-   6. فهرست عادت‌ها
+   5. فهرست عادت‌ها
 ============================== */
 
 .habit-list {
@@ -241,7 +180,7 @@ a:focus-visible {
 }
 
 /* ==============================
-   7. کارت هر عادت
+   6. کارت عادت
 ============================== */
 
 .habit-card {
@@ -298,7 +237,7 @@ a:focus-visible {
 }
 
 /* ==============================
-   8. برچسب نوع عادت
+   7. برچسب نوع و وضعیت عادت
 ============================== */
 
 .frequency-badge,
@@ -328,8 +267,8 @@ a:focus-visible {
 }
 
 .frequency-monthly {
-  color: #a56a0b;
-  background: #fff4dc;
+  color: var(--warning);
+  background: var(--warning-bg);
 }
 
 .status-active {
@@ -343,7 +282,7 @@ a:focus-visible {
 }
 
 /* ==============================
-   9. جزئیات عادت
+   8. جزئیات عادت
 ============================== */
 
 .habit-details {
@@ -376,7 +315,7 @@ a:focus-visible {
 }
 
 /* ==============================
-   10. دکمه‌های مدیریت عادت
+   9. دکمه‌های مدیریت عادت
 ============================== */
 
 .habit-actions {
@@ -438,7 +377,7 @@ a:focus-visible {
 }
 
 /* ==============================
-   11. وضعیت امروز
+   10. وضعیت امروز
 ============================== */
 
 .today-section {
@@ -506,7 +445,7 @@ a:focus-visible {
 }
 
 /* ==============================
-   12. سابقه انجام عادت
+   11. سابقه انجام عادت
 ============================== */
 
 .history-section {
@@ -570,7 +509,7 @@ a:focus-visible {
 }
 
 /* ==============================
-   13. حالت بدون عادت
+   12. نبود عادت در فهرست
 ============================== */
 
 .empty-state {
@@ -597,7 +536,7 @@ a:focus-visible {
 }
 
 /* ==============================
-   14. نمایش در موبایل
+   13. نمایش در موبایل
 ============================== */
 
 @media (max-width: 600px) {
@@ -677,22 +616,5 @@ a:focus-visible {
 
   .history-item {
     align-items: flex-start;
-  }
-}
-
-/* ==============================
-   15. کاهش حرکت برای دسترس‌پذیری
-============================== */
-
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-
-  *,
-  *::before,
-  *::after {
-    transition-duration: 0.01ms !important;
-    animation-duration: 0.01ms !important;
   }
 }
