@@ -1,0 +1,105 @@
+/* ========================================
+   1. رنگ‌های مشترک پروژه
+======================================== */
+
+:root {
+  --primary: #6c63ff;
+  --primary-dark: #554bea;
+  --secondary: #8b5cf6;
+
+  --background: #f5f6ff;
+  --surface: #ffffff;
+
+  --text: #252642;
+  --text-muted: #777b95;
+
+  --border: #e9eaf5;
+
+  --success: #16845b;
+  --success-bg: #e7f8ef;
+
+  --danger: #d83f52;
+  --danger-bg: #fff0f1;
+
+  --warning: #a76a0b;
+  --warning-bg: #fff5df;
+
+  --radius: 18px;
+}
+
+/* ========================================
+   2. تنظیمات پایه تمام عناصر
+======================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* ========================================
+   3. تنظیمات عمومی صفحه
+======================================== */
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+
+  font-family: "Vazirmatn", sans-serif;
+  font-size: 15px;
+  line-height: 1.8;
+
+  color: var(--text);
+}
+
+/* ========================================
+   4. هماهنگی فونت عناصر فرم
+======================================== */
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+/* ========================================
+   5. تنظیمات پایه لینک‌ها
+======================================== */
+
+a {
+  color: inherit;
+}
+
+/* ========================================
+   6. نمایش مناسب فوکوس با صفحه‌کلید
+======================================== */
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid rgba(108, 99, 255, 0.3);
+  outline-offset: 3px;
+}
+
+/* ========================================
+   7. کاهش حرکت برای کاربران نیازمند
+======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
