@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.rtl.min.css"
+      rel="stylesheet"
+    />
+
+    <title>خانه</title>
+  </head>
+
+  <body>
+    <div class="container mt-5">
+      <h1 class="mb-4">خوش آمدید</h1>
+
+      <h2>Habit های من</h2>
+
+      {% for habit in habits %}
+
+      <div>
+        <h3>{{ habit.title }}</h3>
+
+        {% if habit.frequency == 'O' %}
+
+        <p>تاریخ: {{ habit.once_date }}</p>
+
+        {% elif habit.frequency == 'D' %}
+
+        <p>ساعت: {{ habit.time }}</p>
+
+        {% elif habit.frequency == 'M' %}
+
+        <p>روز ماه: {{ habit.day_of_month }}</p>
+
+        {% endif %}
+        <a href="{% url 'edit_habit' habit.id %}"> ویرایش</a>
+
+        <p>
+          وضعیت: {% if habit.is_active %} فعال {% else %} غیرفعال {% endif %}
+        </p>
+
+        {% if user.is_authenticated %}
+        <form method="post" action="{% url 'toggle_checkin' habit.id %}">
+          {% csrf_token %}
+
+          <button type="submit">
+            {% if habit.today_checkin and habit.today_checkin.is_done %} تغییر
+            به انجام‌نشده {% else %} ثبت انجام امروز {% endif %}
+          </button>
+        </form>
+        {% endif %}
+
+        <form method="post" action="{% url 'toggle_habit_status' habit.id %}">
+          {% csrf_token %} {% if habit.is_active %}
+          <button type="submit">غیرفعال کردن</button>
+          {% else %}
+          <button type="submit">فعال کردن</button>
+          {% endif %}
+        </form>
+
+        <form method="POST" action="{% url 'delete_habit' habit.id %}">
+          {% csrf_token %}
+
+          <button type="submit">حذف</button>
+        </form>
+      </div>
+
+      {% if habit.today_checkin %} {% if habit.today_checkin.is_done %}
+      <p>وضعیت امروز: انجام شده ✅</p>
+      {% else %}
+      <p>وضعیت امروز: انجام نشده ❌</p>
+      {% endif %} {% else %}
+      <p>وضعیت امروز: هنوز ثبت نشده</p>
+      {% endif %}
+
+      <h4>سابقه‌ی انجام عادت</h4>
+
+      {% if habit.checkin_history %}
+      <ul>
+        {% for checkin in habit.checkin_history %}
+        <li>
+          {{ checkin.date|date:"Y/m/d" }} - {% if checkin.is_done %} انجام شده
+          ✅ {% else %} انجام نشده ❌ {% endif %}
+        </li>
+        {% endfor %}
+      </ul>
+      {% else %}
+      <p>هنوز سابقه‌ای ثبت نشده است.</p>
+      {% endif %} {% endfor %}
+
+      <form method="post" action="{% url 'logout' %}">
+        {% csrf_token %} {% if user.is_authenticated %}
+
+        <button type="submit" class="btn btn-danger">خروج</button>
+        {% endif %}
+      </form>
+    </div>
+  </body>
+</html>
