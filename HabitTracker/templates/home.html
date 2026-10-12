@@ -1,212 +1,191 @@
-{% load static %}
-<!doctype html>
-<html lang="fa" dir="rtl">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+{% extends 'base.html' %} {% load static %} {% block title %}خانه | Habit
+Tracker{% endblock %} {% block body_class %}home-page{% endblock %} {% block
+extra_css %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}" />
+{% endblock %} {% block content %}
 
-    <link
-      href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css"
-      rel="stylesheet"
-      type="text/css"
-    />
+<!-- سربرگ صفحه -->
+<header class="site-header">
+  <div class="page-container header-content">
+    <div class="site-brand">
+      <span class="brand-icon">H</span>
+      <span class="brand-name">Habit Tracker</span>
+    </div>
 
-    <link rel="stylesheet" href="{% static 'css/home.css' %}" />
+    <div class="header-user">
+      <p class="welcome-text">خوش آمدید</p>
 
-    <title>خانه | Habit Tracker</title>
-  </head>
+      {% if user.is_authenticated %}
+      <form method="post" action="{% url 'logout' %}" class="logout-form">
+        {% csrf_token %}
+        <button type="submit" class="button button-logout">خروج از حساب</button>
+      </form>
+      {% endif %}
+    </div>
+  </div>
+</header>
 
-  <body class="home-page">
-    <!-- سربرگ صفحه -->
-    <header class="site-header">
-      <div class="page-container header-content">
-        <div class="site-brand">
-          <span class="brand-icon">H</span>
-          <span class="brand-name">Habit Tracker</span>
-        </div>
+<main class="page-container main-content">
+  <!-- معرفی صفحه -->
+  <section class="page-intro">
+    <p class="section-eyebrow">مدیریت عادت‌ها</p>
 
-        <div class="header-user">
-          <p class="welcome-text">خوش آمدید</p>
+    <h1 class="page-title">عادت‌های من</h1>
 
-          {% if user.is_authenticated %}
-          <form method="post" action="{% url 'logout' %}" class="logout-form">
-            {% csrf_token %}
-            <button type="submit" class="button button-logout">
-              خروج از حساب
-            </button>
-          </form>
+    <p class="page-description">
+      عادت‌هایت را مدیریت کن و پیشرفت روزانه‌ات را دنبال کن.
+    </p>
+  </section>
+
+  <!-- فهرست عادت‌ها -->
+  <section class="habit-list" aria-label="فهرست عادت‌های من">
+    {% for habit in habits %}
+
+    <article class="habit-card">
+      <!-- عنوان و وضعیت عادت -->
+      <header class="habit-card-header">
+        <div class="habit-heading">
+          <h2 class="habit-title">{{ habit.title }}</h2>
+
+          {% if habit.frequency == 'O' %}
+          <span class="frequency-badge frequency-once"> یک‌باره </span>
+          {% elif habit.frequency == 'D' %}
+          <span class="frequency-badge frequency-daily"> روزانه </span>
+          {% elif habit.frequency == 'M' %}
+          <span class="frequency-badge frequency-monthly"> ماهانه </span>
           {% endif %}
         </div>
-      </div>
-    </header>
 
-    <main class="page-container main-content">
-      <!-- معرفی صفحه -->
-      <section class="page-intro">
-        <p class="section-eyebrow">مدیریت عادت‌ها</p>
-        <h1 class="page-title">عادت‌های من</h1>
-        <p class="page-description">
-          عادت‌هایت را مدیریت کن و پیشرفت روزانه‌ات را دنبال کن.
+        <span
+          class="status-badge {% if habit.is_active %}status-active{% else %}status-inactive{% endif %}"
+        >
+          {% if habit.is_active %} فعال {% else %} غیرفعال {% endif %}
+        </span>
+      </header>
+
+      <!-- اطلاعات عادت -->
+      <div class="habit-details">
+        {% if habit.frequency == 'O' %}
+        <p class="detail-item">
+          <span class="detail-label">تاریخ:</span>
+          <span class="detail-value">{{ habit.once_date }}</span>
         </p>
+
+        {% elif habit.frequency == 'D' %}
+        <p class="detail-item">
+          <span class="detail-label">ساعت:</span>
+          <span class="detail-value">{{ habit.time }}</span>
+        </p>
+
+        {% elif habit.frequency == 'M' %}
+        <p class="detail-item">
+          <span class="detail-label">روز ماه:</span>
+          <span class="detail-value">{{ habit.day_of_month }}</span>
+        </p>
+        {% endif %}
+      </div>
+
+      <!-- دکمه‌های مدیریت عادت -->
+      <div class="habit-actions">
+        <a href="{% url 'edit_habit' habit.id %}" class="button button-edit">
+          ویرایش
+        </a>
+
+        {% if user.is_authenticated %}
+        <form
+          method="post"
+          action="{% url 'toggle_checkin' habit.id %}"
+          class="action-form"
+        >
+          {% csrf_token %}
+
+          <button type="submit" class="button button-checkin">
+            {% if habit.today_checkin and habit.today_checkin.is_done %} تغییر
+            به انجام‌نشده {% else %} ثبت انجام امروز {% endif %}
+          </button>
+        </form>
+        {% endif %}
+
+        <form
+          method="post"
+          action="{% url 'toggle_habit_status' habit.id %}"
+          class="action-form"
+        >
+          {% csrf_token %} {% if habit.is_active %}
+          <button type="submit" class="button button-status">
+            غیرفعال کردن
+          </button>
+          {% else %}
+          <button type="submit" class="button button-status">فعال کردن</button>
+          {% endif %}
+        </form>
+
+        <form
+          method="post"
+          action="{% url 'delete_habit' habit.id %}"
+          class="action-form"
+        >
+          {% csrf_token %}
+
+          <button type="submit" class="button button-delete">حذف</button>
+        </form>
+      </div>
+
+      <!-- وضعیت انجام عادت در امروز -->
+      <section class="today-section">
+        <h3 class="subsection-title">وضعیت امروز</h3>
+
+        {% if habit.today_checkin %} {% if habit.today_checkin.is_done %}
+        <p class="today-status today-done">
+          <span class="status-icon">✓</span>
+          انجام شده
+        </p>
+        {% else %}
+        <p class="today-status today-not-done">
+          <span class="status-icon">✕</span>
+          انجام نشده
+        </p>
+        {% endif %} {% else %}
+        <p class="today-status today-not-recorded">هنوز ثبت نشده است</p>
+        {% endif %}
       </section>
 
-      <!-- فهرست عادت‌ها -->
-      <section class="habit-list" aria-label="فهرست عادت‌های من">
-        {% for habit in habits %}
+      <!-- سابقه انجام عادت -->
+      <section class="history-section">
+        <h3 class="subsection-title">سابقه انجام عادت</h3>
 
-        <article class="habit-card">
-          <!-- عنوان و وضعیت عادت -->
-          <header class="habit-card-header">
-            <div class="habit-heading">
-              <h2 class="habit-title">{{ habit.title }}</h2>
+        {% if habit.checkin_history %}
+        <ul class="history-list">
+          {% for checkin in habit.checkin_history %}
+          <li class="history-item">
+            <span class="history-date"> {{ checkin.date|date:"Y/m/d" }} </span>
 
-              {% if habit.frequency == 'O' %}
-              <span class="frequency-badge frequency-once"> یک‌باره </span>
-              {% elif habit.frequency == 'D' %}
-              <span class="frequency-badge frequency-daily"> روزانه </span>
-              {% elif habit.frequency == 'M' %}
-              <span class="frequency-badge frequency-monthly"> ماهانه </span>
-              {% endif %}
-            </div>
-
-            <span
-              class="status-badge {% if habit.is_active %}status-active{% else %}status-inactive{% endif %}"
-            >
-              {% if habit.is_active %} فعال {% else %} غیرفعال {% endif %}
-            </span>
-          </header>
-
-          <!-- اطلاعات عادت -->
-          <div class="habit-details">
-            {% if habit.frequency == 'O' %}
-            <p class="detail-item">
-              <span class="detail-label">تاریخ:</span>
-              <span class="detail-value">{{ habit.once_date }}</span>
-            </p>
-
-            {% elif habit.frequency == 'D' %}
-            <p class="detail-item">
-              <span class="detail-label">ساعت:</span>
-              <span class="detail-value">{{ habit.time }}</span>
-            </p>
-
-            {% elif habit.frequency == 'M' %}
-            <p class="detail-item">
-              <span class="detail-label">روز ماه:</span>
-              <span class="detail-value">{{ habit.day_of_month }}</span>
-            </p>
-            {% endif %}
-          </div>
-
-          <!-- دکمه‌های مدیریت عادت -->
-          <div class="habit-actions">
-            <a
-              href="{% url 'edit_habit' habit.id %}"
-              class="button button-edit"
-            >
-              ویرایش
-            </a>
-
-            {% if user.is_authenticated %}
-            <form
-              method="post"
-              action="{% url 'toggle_checkin' habit.id %}"
-              class="action-form"
-            >
-              {% csrf_token %}
-
-              <button type="submit" class="button button-checkin">
-                {% if habit.today_checkin and habit.today_checkin.is_done %}
-                تغییر به انجام‌نشده {% else %} ثبت انجام امروز {% endif %}
-              </button>
-            </form>
-            {% endif %}
-
-            <form
-              method="post"
-              action="{% url 'toggle_habit_status' habit.id %}"
-              class="action-form"
-            >
-              {% csrf_token %} {% if habit.is_active %}
-              <button type="submit" class="button button-status">
-                غیرفعال کردن
-              </button>
-              {% else %}
-              <button type="submit" class="button button-status">
-                فعال کردن
-              </button>
-              {% endif %}
-            </form>
-
-            <form
-              method="post"
-              action="{% url 'delete_habit' habit.id %}"
-              class="action-form"
-            >
-              {% csrf_token %}
-
-              <button type="submit" class="button button-delete">حذف</button>
-            </form>
-          </div>
-
-          <!-- وضعیت انجام عادت در امروز -->
-          <section class="today-section">
-            <h3 class="subsection-title">وضعیت امروز</h3>
-
-            {% if habit.today_checkin %} {% if habit.today_checkin.is_done %}
-            <p class="today-status today-done">
-              <span class="status-icon">✓</span>
-              انجام شده
-            </p>
+            {% if checkin.is_done %}
+            <span class="history-result history-done"> انجام شده ✓ </span>
             {% else %}
-            <p class="today-status today-not-done">
-              <span class="status-icon">✕</span>
-              انجام نشده
-            </p>
-            {% endif %} {% else %}
-            <p class="today-status today-not-recorded">هنوز ثبت نشده است</p>
+            <span class="history-result history-not-done"> انجام نشده ✕ </span>
             {% endif %}
-          </section>
-
-          <!-- سابقه انجام عادت -->
-          <section class="history-section">
-            <h3 class="subsection-title">سابقه انجام عادت</h3>
-
-            {% if habit.checkin_history %}
-            <ul class="history-list">
-              {% for checkin in habit.checkin_history %}
-              <li class="history-item">
-                <span class="history-date">
-                  {{ checkin.date|date:"Y/m/d" }}
-                </span>
-
-                {% if checkin.is_done %}
-                <span class="history-result history-done"> انجام شده ✓ </span>
-                {% else %}
-                <span class="history-result history-not-done">
-                  انجام نشده ✕
-                </span>
-                {% endif %}
-              </li>
-              {% endfor %}
-            </ul>
-            {% else %}
-            <p class="empty-history">هنوز سابقه‌ای ثبت نشده است.</p>
-            {% endif %}
-          </section>
-        </article>
-
-        {% empty %}
-
-        <div class="empty-state">
-          <h2 class="empty-title">هنوز عادتی ثبت نشده است</h2>
-          <p class="empty-description">
-            وقتی عادتی ایجاد کنی، اینجا نمایش داده می‌شود.
-          </p>
-        </div>
-
-        {% endfor %}
+          </li>
+          {% endfor %}
+        </ul>
+        {% else %}
+        <p class="empty-history">هنوز سابقه‌ای ثبت نشده است.</p>
+        {% endif %}
       </section>
-    </main>
-  </body>
-</html>
+    </article>
+
+    {% empty %}
+
+    <div class="empty-state">
+      <h2 class="empty-title">هنوز عادتی ثبت نشده است</h2>
+
+      <p class="empty-description">
+        وقتی عادتی ایجاد کنی، اینجا نمایش داده می‌شود.
+      </p>
+    </div>
+
+    {% endfor %}
+  </section>
+</main>
+
+{% endblock %}
