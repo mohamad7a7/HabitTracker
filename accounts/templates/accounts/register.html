@@ -1,68 +1,84 @@
+
+{% extends 'base.html' %}
 {% load static %}
-<!doctype html>
-<html lang="fa" dir="rtl">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- فونت وزیرمتن -->
-    <link
-      href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css"
-      rel="stylesheet"
-      type="text/css"
-    />
+{% block title %}
+  ثبت‌نام | Habit Tracker
+{% endblock title %}
 
-    <!-- استایل اختصاصی صفحه ثبت‌نام -->
-    <link rel="stylesheet" href="{% static 'accounts/css/register.css' %}" />
+{% block body_class %}
+  register-page
+{% endblock body_class %}
 
-    <title>ثبت‌نام | Habit Tracker</title>
-  </head>
+{% block extra_css %}
+  <link
+    rel="stylesheet"
+    href="{% static 'accounts/css/register.css' %}"
+  />
+{% endblock extra_css %}
 
-  <body class="register-page">
-    <main class="register-container">
-      <!-- سربرگ صفحه -->
-      <header class="register-header">
-        <a href="{% url 'home' %}" class="brand">
-          <span class="brand-icon">H</span>
-          <span class="brand-name">Habit Tracker</span>
+{% block content %}
+
+  <main class="register-container">
+
+    <!-- سربرگ صفحه -->
+    <header class="register-header">
+
+      <a href="{% url 'home' %}" class="brand">
+        <span class="brand-icon">H</span>
+        <span class="brand-name">Habit Tracker</span>
+      </a>
+
+      <p class="register-eyebrow">شروع یک مسیر جدید</p>
+
+      <h1 class="register-title">ساخت حساب کاربری</h1>
+
+      <p class="register-description">
+        حساب خودت رو بساز و برای ایجاد عادت‌های بهتر قدم بردار.
+      </p>
+
+    </header>
+
+    <!-- کارت ثبت‌نام -->
+    <section class="register-card">
+
+      <h2 class="form-title">ثبت‌نام</h2>
+
+      <p class="form-description">
+        اطلاعات موردنیاز رو در فرم زیر وارد کن.
+      </p>
+
+      <!-- فرم ثبت‌نام Django -->
+      <form method="post" class="register-form">
+
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <button type="submit" class="register-button">
+          ایجاد حساب کاربری
+        </button>
+
+      </form>
+
+      <!-- لینک ورود به حساب -->
+      <div class="login-prompt">
+        <span>قبلاً ثبت‌نام کردی؟</span>
+
+        <a href="{% url 'login' %}" class="login-link">
+          وارد شو
         </a>
+      </div>
 
-        <p class="register-eyebrow">شروع یک مسیر جدید</p>
+    </section>
 
-        <h1 class="register-title">ساخت حساب کاربری</h1>
+    <!-- بازگشت به صفحه اصلی -->
+    <footer class="register-footer">
+      <a href="{% url 'home' %}" class="home-link">
+        بازگشت به صفحه اصلی
+      </a>
+    </footer>
 
-        <p class="register-description">
-          حساب خودت رو بساز و برای ایجاد عادت‌های بهتر قدم بردار.
-        </p>
-      </header>
+  </main>
 
-      <!-- کارت ثبت‌نام -->
-      <section class="register-card">
-        <h2 class="form-title">ثبت‌نام</h2>
-
-        <p class="form-description">اطلاعات موردنیاز رو در فرم زیر وارد کن.</p>
-
-        <!-- فرم ثبت‌نام Django -->
-        <form method="post" class="register-form">
-          {% csrf_token %} {{ form.as_p }}
-
-          <button type="submit" class="register-button">
-            ایجاد حساب کاربری
-          </button>
-        </form>
-
-        <!-- لینک ورود به حساب -->
-        <div class="login-prompt">
-          <span>قبلاً ثبت‌نام کردی؟</span>
-
-          <a href="{% url 'login' %}" class="login-link"> وارد شو </a>
-        </div>
-      </section>
-
-      <!-- بازگشت به صفحه اصلی -->
-      <footer class="register-footer">
-        <a href="{% url 'home' %}" class="home-link"> بازگشت به صفحه اصلی </a>
-      </footer>
-    </main>
-  </body>
-</html>
+{% endblock content %}
