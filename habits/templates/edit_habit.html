@@ -1,74 +1,95 @@
+
+{% extends 'base.html' %}
 {% load static %}
-<!doctype html>
-<html lang="fa" dir="rtl">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- فونت فارسی وزیرمتن -->
-    <link
-      href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css"
-      rel="stylesheet"
-      type="text/css"
-    />
+{% block title %}
+  ویرایش عادت | Habit Tracker
+{% endblock title %}
 
-    <!-- استایل اختصاصی صفحه ویرایش عادت -->
-    <link rel="stylesheet" href="{% static 'habits/css/edit_habit.css' %}" />
+{% block body_class %}
+  edit-habit-page
+{% endblock body_class %}
 
-    <title>ویرایش عادت | Habit Tracker</title>
-  </head>
+{% block extra_css %}
+  <link
+    rel="stylesheet"
+    href="{% static 'habits/css/edit_habit.css' %}"
+  />
+{% endblock extra_css %}
 
-  <body class="edit-habit-page">
-    <main class="edit-habit-container">
-      <!-- سربرگ صفحه -->
-      <header class="edit-habit-header">
-        <a href="{% url 'home' %}" class="brand">
-          <span class="brand-icon">H</span>
-          <span class="brand-name">Habit Tracker</span>
-        </a>
+{% block content %}
 
-        <a href="{% url 'home' %}" class="back-link"> بازگشت به صفحه اصلی </a>
-      </header>
+  <main class="edit-habit-container">
 
-      <!-- معرفی صفحه -->
-      <section class="page-intro">
-        <p class="section-eyebrow">مدیریت عادت‌ها</p>
+    <!-- سربرگ صفحه -->
+    <header class="edit-habit-header">
 
-        <h1 class="page-title">ویرایش عادت</h1>
+      <a href="{% url 'home' %}" class="brand">
+        <span class="brand-icon">H</span>
+        <span class="brand-name">Habit Tracker</span>
+      </a>
 
-        <p class="page-description">
-          اطلاعات عادتت رو تغییر بده و تغییرات جدید رو ذخیره کن.
+      <a href="{% url 'home' %}" class="back-link">
+        بازگشت به صفحه اصلی
+      </a>
+
+    </header>
+
+    <!-- معرفی صفحه -->
+    <section class="page-intro">
+
+      <p class="section-eyebrow">مدیریت عادت‌ها</p>
+
+      <h1 class="page-title">ویرایش عادت</h1>
+
+      <p class="page-description">
+        اطلاعات عادتت رو تغییر بده و تغییرات جدید رو ذخیره کن.
+      </p>
+
+    </section>
+
+    <!-- فرم ویرایش عادت -->
+    <section class="edit-habit-card">
+
+      <div class="form-heading">
+        <h2 class="form-title">اطلاعات عادت</h2>
+
+        <p class="form-description">
+          پس از انجام تغییرات، دکمهٔ ذخیره رو بزن.
         </p>
-      </section>
+      </div>
 
-      <!-- فرم ویرایش عادت -->
-      <section class="edit-habit-card">
-        <div class="form-heading">
-          <h2 class="form-title">اطلاعات عادت</h2>
+      <form method="POST" novalidate class="edit-habit-form">
 
-          <p class="form-description">
-            پس از انجام تغییرات، دکمهٔ ذخیره رو بزن.
-          </p>
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <div class="form-actions">
+
+          <button type="submit" class="submit-button">
+            ذخیره تغییرات
+          </button>
+
+          <a href="{% url 'home' %}" class="cancel-link">
+            انصراف
+          </a>
+
         </div>
 
-        <form method="POST" novalidate class="edit-habit-form">
-          {% csrf_token %} {{ form.as_p }}
+      </form>
 
-          <div class="form-actions">
-            <button type="submit" class="submit-button">ذخیره تغییرات</button>
+    </section>
 
-            <a href="{% url 'home' %}" class="cancel-link"> انصراف </a>
-          </div>
-        </form>
-      </section>
+    <!-- پایین صفحه -->
+    <footer class="edit-habit-footer">
+      <p>عادت‌هایت را متناسب با هدفت تنظیم کن.</p>
+    </footer>
 
-      <!-- پایین صفحه -->
-      <footer class="edit-habit-footer">
-        <p>عادت‌هایت را متناسب با هدفت تنظیم کن.</p>
-      </footer>
-    </main>
+  </main>
 
-    <!-- اسکریپت قبلی؛ برای حفظ رفتار فعلی فرم -->
-    <script src="{% static 'habits/js/create_habit.js' %}"></script>
-  </body>
-</html>
+{% endblock content %}
+
+{% block extra_js %}
+  <script src="{% static 'habits/js/create_habit.js' %}"></script>
+{% endblock extra_js %}

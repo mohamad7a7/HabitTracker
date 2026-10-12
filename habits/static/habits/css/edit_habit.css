@@ -1,43 +1,11 @@
+
 /* ==============================
-   1. رنگ‌ها و تنظیمات عمومی
+   1. پس‌زمینه و محدوده صفحه
 ============================== */
-
-:root {
-  --primary: #6c63ff;
-  --primary-dark: #554bea;
-  --secondary: #8b5cf6;
-
-  --background: #f5f6ff;
-  --surface: #ffffff;
-
-  --text: #252642;
-  --text-muted: #777b95;
-
-  --border: #e9eaf5;
-
-  --danger: #d83f52;
-  --danger-bg: #fff0f1;
-
-  --radius: 20px;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
-}
 
 body.edit-habit-page {
   min-height: 100vh;
-  margin: 0;
   padding: 32px 16px;
-
-  font-family: "Vazirmatn", sans-serif;
-  font-size: 15px;
-  line-height: 1.8;
-  color: var(--text);
 
   background:
     radial-gradient(
@@ -53,47 +21,15 @@ body.edit-habit-page {
     var(--background);
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-button,
-input,
-select,
-textarea {
-  font: inherit;
-}
-
-button,
-a,
-input,
-select,
-textarea {
-  -webkit-tap-highlight-color: transparent;
-}
-
-button:focus-visible,
-a:focus-visible,
-input:focus-visible,
-select:focus-visible,
-textarea:focus-visible {
-  outline: 3px solid rgba(108, 99, 255, 0.3);
-  outline-offset: 3px;
-}
-
-/* ==============================
-   2. محدوده اصلی صفحه
-============================== */
-
 .edit-habit-container {
   width: 100%;
   max-width: 760px;
   margin-inline: auto;
 }
 
+
 /* ==============================
-   3. سربرگ صفحه
+   2. سربرگ صفحه
 ============================== */
 
 .edit-habit-header {
@@ -119,7 +55,12 @@ textarea:focus-visible {
   place-items: center;
 
   color: #ffffff;
-  background: linear-gradient(135deg, var(--primary), var(--secondary));
+
+  background: linear-gradient(
+    135deg,
+    var(--primary),
+    var(--secondary)
+  );
 
   border-radius: 14px;
 
@@ -145,8 +86,9 @@ textarea:focus-visible {
   color: var(--primary);
 }
 
+
 /* ==============================
-   4. عنوان و معرفی صفحه
+   3. عنوان و معرفی صفحه
 ============================== */
 
 .page-intro {
@@ -176,8 +118,9 @@ textarea:focus-visible {
   font-size: 14px;
 }
 
+
 /* ==============================
-   5. کارت فرم ویرایش
+   4. کارت فرم ویرایش
 ============================== */
 
 .edit-habit-card {
@@ -211,8 +154,9 @@ textarea:focus-visible {
   font-size: 13px;
 }
 
+
 /* ==============================
-   6. فرم Django
+   5. فیلدهای فرم Django
 ============================== */
 
 .edit-habit-form {
@@ -220,15 +164,13 @@ textarea:focus-visible {
 }
 
 /*
-  در {{ form.as_p }} فیلدهای فرم Django
-  معمولاً داخل تگ‌های p قرار می‌گیرند.
+  Django با form.as_p معمولاً
+  هر فیلد را داخل تگ p قرار می‌دهد.
 */
 
 .edit-habit-form p {
   margin: 0 0 22px;
 }
-
-/* عنوان فیلدها */
 
 .edit-habit-form label {
   display: block;
@@ -239,10 +181,9 @@ textarea:focus-visible {
   font-weight: bold;
 }
 
-/* فیلدهای متنی، تاریخ، ساعت و انتخاب‌ها */
+/* فیلدهای متنی، تاریخ، ساعت و انتخاب */
 
-.edit-habit-form
-  input:not([type="hidden"]):not([type="checkbox"]):not([type="radio"]),
+.edit-habit-form input:not([type="hidden"]):not([type="checkbox"]):not([type="radio"]),
 .edit-habit-form select,
 .edit-habit-form textarea {
   display: block;
@@ -256,7 +197,6 @@ textarea:focus-visible {
   border: 1px solid #dedff0;
   border-radius: 11px;
 
-  font-family: "Vazirmatn", sans-serif;
   font-size: 14px;
 
   transition:
@@ -267,8 +207,7 @@ textarea:focus-visible {
 
 /* حالت انتخاب فیلد */
 
-.edit-habit-form
-  input:not([type="hidden"]):not([type="checkbox"]):not([type="radio"]):focus,
+.edit-habit-form input:not([type="hidden"]):not([type="checkbox"]):not([type="radio"]):focus,
 .edit-habit-form select:focus,
 .edit-habit-form textarea:focus {
   background: #ffffff;
@@ -278,14 +217,14 @@ textarea:focus-visible {
   box-shadow: 0 0 0 4px rgba(108, 99, 255, 0.11);
 }
 
-/* گزینه‌های تیک‌زدنی و رادیویی */
+/* فیلدهای checkbox و radio */
 
 .edit-habit-form input[type="checkbox"],
 .edit-habit-form input[type="radio"] {
   accent-color: var(--primary);
 }
 
-/* متن راهنمای فیلدها */
+/* توضیحات راهنمای فرم */
 
 .edit-habit-form .helptext {
   display: block;
@@ -296,8 +235,6 @@ textarea:focus-visible {
   line-height: 1.9;
 }
 
-/* فهرست‌های راهنما */
-
 .edit-habit-form ul {
   margin: 8px 0 0;
   padding-right: 20px;
@@ -306,8 +243,9 @@ textarea:focus-visible {
   font-size: 12px;
 }
 
+
 /* ==============================
-   7. خطاهای فرم
+   6. خطاهای فرم
 ============================== */
 
 .edit-habit-form .errorlist {
@@ -333,8 +271,9 @@ textarea:focus-visible {
   margin-bottom: 20px;
 }
 
+
 /* ==============================
-   8. دکمه ذخیره و انصراف
+   7. دکمه‌های ذخیره و انصراف
 ============================== */
 
 .form-actions {
@@ -354,12 +293,16 @@ textarea:focus-visible {
   padding: 10px 24px;
 
   color: #ffffff;
-  background: linear-gradient(135deg, var(--primary), #7b5cf0);
+
+  background: linear-gradient(
+    135deg,
+    var(--primary),
+    #7b5cf0
+  );
 
   border: 0;
   border-radius: 11px;
 
-  font-family: "Vazirmatn", sans-serif;
   font-size: 14px;
   font-weight: bold;
 
@@ -374,7 +317,11 @@ textarea:focus-visible {
 }
 
 .submit-button:hover {
-  background: linear-gradient(135deg, var(--primary-dark), #6948df);
+  background: linear-gradient(
+    135deg,
+    var(--primary-dark),
+    #6948df
+  );
 
   box-shadow: 0 10px 22px rgba(108, 99, 255, 0.27);
 
@@ -411,8 +358,9 @@ textarea:focus-visible {
   background: #efedff;
 }
 
+
 /* ==============================
-   9. پایین صفحه
+   8. پایین صفحه
 ============================== */
 
 .edit-habit-footer {
@@ -427,8 +375,9 @@ textarea:focus-visible {
   font-size: 12px;
 }
 
+
 /* ==============================
-   10. نمایش در موبایل
+   9. نمایش در موبایل
 ============================== */
 
 @media (max-width: 600px) {
@@ -486,21 +435,5 @@ textarea:focus-visible {
   .submit-button,
   .cancel-link {
     width: 100%;
-  }
-}
-
-/* ==============================
-   11. کاهش حرکت برای دسترس‌پذیری
-============================== */
-
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-
-  *,
-  *::before,
-  *::after {
-    transition-duration: 0.01ms !important;
   }
 }
