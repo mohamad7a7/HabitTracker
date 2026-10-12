@@ -1,63 +1,83 @@
+
+{% extends 'base.html' %}
 {% load static %}
-<!doctype html>
-<html lang="fa" dir="rtl">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- فونت وزیرمتن -->
-    <link
-      href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css"
-      rel="stylesheet"
-      type="text/css"
-    />
+{% block title %}
+  ورود | Habit Tracker
+{% endblock title %}
 
-    <!-- استایل اختصاصی صفحه ورود -->
-    <link rel="stylesheet" href="{% static 'accounts/css/login.css' %}" />
-    <title>ورود | Habit Tracker</title>
-  </head>
+{% block body_class %}
+  login-page
+{% endblock body_class %}
 
-  <body class="login-page">
-    <main class="login-container">
-      <!-- معرفی برنامه -->
-      <header class="login-header">
-        <a href="{% url 'home' %}" class="brand">
-          <span class="brand-icon">H</span>
-          <span class="brand-name">Habit Tracker</span>
+{% block extra_css %}
+  <link
+    rel="stylesheet"
+    href="{% static 'accounts/css/login.css' %}"
+  />
+{% endblock extra_css %}
+
+{% block content %}
+
+  <main class="login-container">
+
+    <!-- معرفی برنامه -->
+    <header class="login-header">
+
+      <a href="{% url 'home' %}" class="brand">
+        <span class="brand-icon">H</span>
+        <span class="brand-name">Habit Tracker</span>
+      </a>
+
+      <p class="login-eyebrow">خوش برگشتی!</p>
+
+      <h1 class="login-title">ورود به حساب کاربری</h1>
+
+      <p class="login-description">
+        وارد حساب خودت شو و مدیریت عادت‌هایت را ادامه بده.
+      </p>
+
+    </header>
+
+    <!-- فرم ورود -->
+    <section class="login-card">
+
+      <h2 class="form-title">ورود</h2>
+
+      <p class="form-description">
+        اطلاعات حساب کاربری خودت را وارد کن.
+      </p>
+
+      <form method="post" class="login-form">
+
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <button type="submit" class="login-button">
+          ورود به حساب
+        </button>
+
+      </form>
+
+      <!-- لینک ثبت‌نام -->
+      <div class="register-prompt">
+        <span>هنوز حساب کاربری نداری؟</span>
+
+        <a href="{% url 'register' %}" class="register-link">
+          ثبت‌نام کن
         </a>
+      </div>
 
-        <p class="login-eyebrow">خوش برگشتی!</p>
+    </section>
 
-        <h1 class="login-title">ورود به حساب کاربری</h1>
+    <!-- بازگشت به صفحه خانه -->
+    <footer class="login-footer">
+      <a href="{% url 'home' %}" class="home-link">
+        بازگشت به صفحه اصلی
+      </a>
+    </footer>
 
-        <p class="login-description">
-          وارد حساب خودت شو و مدیریت عادت‌هایت را ادامه بده.
-        </p>
-      </header>
+  </main>
 
-      <!-- فرم ورود -->
-      <section class="login-card">
-        <h2 class="form-title">ورود</h2>
-
-        <p class="form-description">اطلاعات حساب کاربری خودت را وارد کن.</p>
-
-        <form method="post" class="login-form">
-          {% csrf_token %} {{ form.as_p }}
-
-          <button type="submit" class="login-button">ورود به حساب</button>
-        </form>
-
-        <!-- لینک ثبت‌نام -->
-        <div class="register-prompt">
-          <span>هنوز حساب کاربری نداری؟</span>
-          <a href="{% url 'register' %}" class="register-link"> ثبت‌نام کن </a>
-        </div>
-      </section>
-
-      <!-- بازگشت به صفحه خانه -->
-      <footer class="login-footer">
-        <a href="{% url 'home' %}" class="home-link"> بازگشت به صفحه اصلی </a>
-      </footer>
-    </main>
-  </body>
-</html>
+{% endblock content %}
