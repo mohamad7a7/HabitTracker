@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'accounts',
     'habits',
     'checkins'
+    'api',
 ]
 
 MIDDLEWARE = [
