@@ -1,23 +1,19 @@
+{% extends 'base.html' %}
 {% load static %}
-<!doctype html>
-<html lang="fa" dir="rtl">
-  <head>
-    <meta charset="UTF-8" />
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.rtl.min.css"
-      rel="stylesheet"
-    />
-    <title>ساخت Habit</title>
-  </head>
+{% block title %}
+  ساخت | Habit Tracker
+{% endblock title %}
+{% block content %}
 
-  <body>
     <h1>ساخت Habit جدید</h1>
 
     <form method="POST" novalidate>
       {% csrf_token %} {{ form.as_p }}
 
       <button type="submit">ساخت Habit</button>
+    
     </form>
+    {% block extra_js %}
     <script src="{% static 'habits/js/create_habit.js' %}"></script>
-  </body>
-</html>
+    {% endblock extra_js %}
+{% endblock %}

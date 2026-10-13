@@ -1,19 +1,10 @@
-<!doctype html>
-<html lang="fa" dir="rtl">
-  <head>
-    <meta charset="UTF-8" />
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+  ورود | Habit Tracker
+{% endblock title %}
+{% block content %}
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.rtl.min.css"
-      rel="stylesheet"
-    />
-
-    <title>ورود</title>
-  </head>
-
-  <body>
     <div class="container mt-5">
       <h1 class="mb-4">ورود</h1>
 
@@ -23,5 +14,4 @@
         <button type="submit" class="btn btn-primary">ورود</button>
       </form>
     </div>
-  </body>
-</html>
+{% endblock %}
