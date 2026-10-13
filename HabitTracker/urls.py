@@ -25,5 +25,4 @@ urlpatterns = [
     path('', include('checkins.urls')),
     path('', include('accounts.urls')),
     path('', include('habits.urls')),
-
 ]
