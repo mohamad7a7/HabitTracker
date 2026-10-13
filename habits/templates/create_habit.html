@@ -1,93 +1,23 @@
-
-{% extends 'base.html' %}
 {% load static %}
+<!doctype html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.rtl.min.css"
+      rel="stylesheet"
+    />
+    <title>ساخت Habit</title>
+  </head>
 
-{% block title %}
-  ساخت عادت جدید | Habit Tracker
-{% endblock title %}
+  <body>
+    <h1>ساخت Habit جدید</h1>
 
-{% block body_class %}
-  create-habit-page
-{% endblock body_class %}
+    <form method="POST" novalidate>
+      {% csrf_token %} {{ form.as_p }}
 
-{% block extra_css %}
-  <link
-    rel="stylesheet"
-    href="{% static 'habits/css/create_habit.css' %}"
-  />
-{% endblock extra_css %}
-
-{% block content %}
-
-  <main class="create-habit-container">
-
-    <!-- سربرگ صفحه -->
-    <header class="create-habit-header">
-
-      <a href="{% url 'home' %}" class="brand">
-        <span class="brand-icon">H</span>
-        <span class="brand-name">Habit Tracker</span>
-      </a>
-
-      <a href="{% url 'home' %}" class="back-link">
-        بازگشت به صفحه اصلی
-      </a>
-
-    </header>
-
-    <!-- معرفی فرم -->
-    <section class="page-intro">
-
-      <p class="section-eyebrow">مدیریت عادت‌ها</p>
-
-      <h1 class="page-title">ساخت عادت جدید</h1>
-
-      <p class="page-description">
-        عادت جدیدت رو تعریف کن و قدم بعدی رو برای رسیدن به هدفت بردار.
-      </p>
-
-    </section>
-
-    <!-- کارت فرم ساخت عادت -->
-    <section class="create-habit-card">
-
-      <div class="form-heading">
-        <h2 class="form-title">اطلاعات عادت</h2>
-
-        <p class="form-description">
-          اطلاعات موردنیاز رو در فرم زیر وارد کن.
-        </p>
-      </div>
-
-      <form method="POST" novalidate class="create-habit-form">
-
-        {% csrf_token %}
-
-        {{ form.as_p }}
-
-        <div class="form-actions">
-          <button type="submit" class="submit-button">
-            ساخت عادت
-          </button>
-
-          <a href="{% url 'home' %}" class="cancel-link">
-            انصراف
-          </a>
-        </div>
-
-      </form>
-
-    </section>
-
-    <!-- توضیح پایین صفحه -->
-    <footer class="create-habit-footer">
-      <p>قدم‌های کوچک، تغییرات بزرگ می‌سازند.</p>
-    </footer>
-
-  </main>
-
-{% endblock content %}
-
-{% block extra_js %}
-  <script src="{% static 'habits/js/create_habit.js' %}"></script>
-{% endblock extra_js %}
+      <button type="submit">ساخت Habit</button>
+    </form>
+    <script src="{% static 'habits/js/create_habit.js' %}"></script>
+  </body>
+</html>

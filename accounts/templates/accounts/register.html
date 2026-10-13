@@ -1,84 +1,17 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
 
-{% extends 'base.html' %}
-{% load static %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.rtl.min.css"
+      rel="stylesheet"
+    />
 
-{% block title %}
-  ثبت‌نام | Habit Tracker
-{% endblock title %}
+    <title>ثبت‌نام</title>
+  </head>
 
-{% block body_class %}
-  register-page
-{% endblock body_class %}
-
-{% block extra_css %}
-  <link
-    rel="stylesheet"
-    href="{% static 'accounts/css/register.css' %}"
-  />
-{% endblock extra_css %}
-
-{% block content %}
-
-  <main class="register-container">
-
-    <!-- سربرگ صفحه -->
-    <header class="register-header">
-
-      <a href="{% url 'home' %}" class="brand">
-        <span class="brand-icon">H</span>
-        <span class="brand-name">Habit Tracker</span>
-      </a>
-
-      <p class="register-eyebrow">شروع یک مسیر جدید</p>
-
-      <h1 class="register-title">ساخت حساب کاربری</h1>
-
-      <p class="register-description">
-        حساب خودت رو بساز و برای ایجاد عادت‌های بهتر قدم بردار.
-      </p>
-
-    </header>
-
-    <!-- کارت ثبت‌نام -->
-    <section class="register-card">
-
-      <h2 class="form-title">ثبت‌نام</h2>
-
-      <p class="form-description">
-        اطلاعات موردنیاز رو در فرم زیر وارد کن.
-      </p>
-
-      <!-- فرم ثبت‌نام Django -->
-      <form method="post" class="register-form">
-
-        {% csrf_token %}
-
-        {{ form.as_p }}
-
-        <button type="submit" class="register-button">
-          ایجاد حساب کاربری
-        </button>
-
-      </form>
-
-      <!-- لینک ورود به حساب -->
-      <div class="login-prompt">
-        <span>قبلاً ثبت‌نام کردی؟</span>
-
-        <a href="{% url 'login' %}" class="login-link">
-          وارد شو
-        </a>
-      </div>
-
-    </section>
-
-    <!-- بازگشت به صفحه اصلی -->
-    <footer class="register-footer">
-      <a href="{% url 'home' %}" class="home-link">
-        بازگشت به صفحه اصلی
-      </a>
-    </footer>
-
-  </main>
-
-{% endblock content %}
+  <body>
+    <div class="container mt-5">
+      <h1 class="mb-4">ثبت‌نام</h1>

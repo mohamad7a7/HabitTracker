@@ -1,95 +1,14 @@
-
-{% extends 'base.html' %}
 {% load static %}
+<!doctype html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.rtl.min.css"
+      rel="stylesheet"
+    />
+    <title>ویرایش Habit</title>
+  </head>
 
-{% block title %}
-  ویرایش عادت | Habit Tracker
-{% endblock title %}
-
-{% block body_class %}
-  edit-habit-page
-{% endblock body_class %}
-
-{% block extra_css %}
-  <link
-    rel="stylesheet"
-    href="{% static 'habits/css/edit_habit.css' %}"
-  />
-{% endblock extra_css %}
-
-{% block content %}
-
-  <main class="edit-habit-container">
-
-    <!-- سربرگ صفحه -->
-    <header class="edit-habit-header">
-
-      <a href="{% url 'home' %}" class="brand">
-        <span class="brand-icon">H</span>
-        <span class="brand-name">Habit Tracker</span>
-      </a>
-
-      <a href="{% url 'home' %}" class="back-link">
-        بازگشت به صفحه اصلی
-      </a>
-
-    </header>
-
-    <!-- معرفی صفحه -->
-    <section class="page-intro">
-
-      <p class="section-eyebrow">مدیریت عادت‌ها</p>
-
-      <h1 class="page-title">ویرایش عادت</h1>
-
-      <p class="page-description">
-        اطلاعات عادتت رو تغییر بده و تغییرات جدید رو ذخیره کن.
-      </p>
-
-    </section>
-
-    <!-- فرم ویرایش عادت -->
-    <section class="edit-habit-card">
-
-      <div class="form-heading">
-        <h2 class="form-title">اطلاعات عادت</h2>
-
-        <p class="form-description">
-          پس از انجام تغییرات، دکمهٔ ذخیره رو بزن.
-        </p>
-      </div>
-
-      <form method="POST" novalidate class="edit-habit-form">
-
-        {% csrf_token %}
-
-        {{ form.as_p }}
-
-        <div class="form-actions">
-
-          <button type="submit" class="submit-button">
-            ذخیره تغییرات
-          </button>
-
-          <a href="{% url 'home' %}" class="cancel-link">
-            انصراف
-          </a>
-
-        </div>
-
-      </form>
-
-    </section>
-
-    <!-- پایین صفحه -->
-    <footer class="edit-habit-footer">
-      <p>عادت‌هایت را متناسب با هدفت تنظیم کن.</p>
-    </footer>
-
-  </main>
-
-{% endblock content %}
-
-{% block extra_js %}
-  <script src="{% static 'habits/js/create_habit.js' %}"></script>
-{% endblock extra_js %}
+  <body>
+    <h1>ویرایش Habit</h1>
