@@ -131,10 +131,6 @@ STATICFILES_DIRS = [
     BASE_DIR / "HabitTracker" / "static",
 ]
 
-STATICFILES_DIRS = [
-    BASE_DIR / "HabitTracker" / "static",
-]
-
 
 # Email
 # https://docs.djangoproject.com/en/6.1/topics/email/#topic-email-configuration
@@ -145,3 +141,9 @@ MAILERS = {
     },
 }
 LOGIN_URL = '/login/'
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ],
+}
