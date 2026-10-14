@@ -70,7 +70,7 @@ class HabitSerializer(serializers.ModelSerializer):
         if frequency == Habit.FRQ_O:
             if not once_date:
                 raise serializers.ValidationError({
-                    'once_date': 'انتخاب تاریخ Habit یک‌باره الزامی است.'
+                    'once_date': ' انتخاب تاریخ یکباره الزامی است'
                 })
 
             attrs['start_date'] = None
