@@ -1,6 +1,6 @@
 from django.urls import path
 from rest_framework.authtoken.views import obtain_auth_token
-from .views import habit_list_create
+from .views import habit_list_create, habit_detail
 
 
 urlpatterns = [
@@ -13,5 +13,10 @@ urlpatterns = [
         'habits/',
         habit_list_create,
         name='habit-list-create'
+    ),
+    path(
+        'habits/<int:pk>/',
+        habit_detail,
+        name='habit-detail'
     ),
 ]
