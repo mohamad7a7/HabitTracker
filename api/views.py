@@ -31,6 +31,17 @@ def register(request):
     )
 
 
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def logout(request):
+    request.user.auth_token.delete()
+
+    return Response(
+        {'message': 'خروج با موفقیت انجام شد.'},
+        status=status.HTTP_200_OK
+    )
+
+
 '''define the rules of seeing habits or creating one'''
 
 
