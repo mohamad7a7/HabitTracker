@@ -1,6 +1,6 @@
 from django.urls import path
 from rest_framework.authtoken.views import obtain_auth_token
-from .views import habit_list_create, habit_detail, checkin_list_create
+from .views import habit_list_create, habit_detail, checkin_list_create, register
 
 
 urlpatterns = [
@@ -24,4 +24,7 @@ urlpatterns = [
         checkin_list_create,
         name='checkin-list-create'
     ),
+    path('auth/register/',
+         register,
+         name='api-register'),
 ]
