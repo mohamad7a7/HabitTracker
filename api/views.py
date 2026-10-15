@@ -1,11 +1,34 @@
 from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
-from .serializers import HabitSerializer, CheckInSerializer
+from .serializers import HabitSerializer, CheckInSerializer, RegisterSerializer
 from django.shortcuts import get_object_or_404
 from habits.models import Habit
 from checkins.models import CheckIn
+
+
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def register(request):
+    serializer = RegisterSerializer(data=request.data)
+
+    if serializer.is_valid():
+        user = serializer.save()
+
+        return Response(
+            {
+                'message': 'ثبت‌نام با موفقیت انجام شد.',
+                'username': user.username,
+                'email': user.email,
+            },
+            status=status.HTTP_201_CREATED
+        )
+
+    return Response(
+        serializer.errors,
+        status=status.HTTP_400_BAD_REQUEST
+    )
 
 
 '''define the rules of seeing habits or creating one'''
