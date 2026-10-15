@@ -2,9 +2,10 @@ from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
-from .serializers import HabitSerializer
+from .serializers import HabitSerializer, CheckInSerializer
 from django.shortcuts import get_object_or_404
 from habits.models import Habit
+from checkins.models import CheckIn
 
 
 @api_view(['GET', 'POST'])
@@ -81,3 +82,47 @@ def habit_detail(request, pk):
         return Response(
             status=status.HTTP_204_NO_CONTENT
         )
+
+
+@api_view(['GET', 'POST'])
+@permission_classes([IsAuthenticated])
+def checkin_list_create(request):
+    if request.method == 'GET':
+        checkins = CheckIn.objects.filter(
+            habit__user=request.user
+        ).order_by('-date')
+
+        serializer = CheckInSerializer(
+            checkins,
+            many=True
+        )
+
+        return Response(
+            serializer.data,
+            status=status.HTTP_200_OK
+        )
+
+    serializer = CheckInSerializer(data=request.data)
+
+    if serializer.is_valid():
+        habit = serializer.validated_data['habit']
+
+        if habit.user != request.user:
+            return Response(
+                {
+                    'habit': 'این عادت متعلق به کاربر واردشده نیست.'
+                },
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        serializer.save()
+
+        return Response(
+            serializer.data,
+            status=status.HTTP_201_CREATED
+        )
+
+    return Response(
+        serializer.errors,
+        status=status.HTTP_400_BAD_REQUEST
+    )
