@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from habits.models import Habit
+from checkins.models import CheckIn
 
 
 class HabitSerializer(serializers.ModelSerializer):
@@ -105,3 +106,22 @@ class HabitSerializer(serializers.ModelSerializer):
             })
 
         return attrs
+
+
+class CheckInSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = CheckIn
+
+        fields = [
+            'id',
+            'habit',
+            'date',
+            'is_done',
+            'created_at',
+        ]
+
+        read_only_fields = [
+            'id',
+            'created_at',
+        ]
