@@ -8,6 +8,9 @@ from habits.models import Habit
 from checkins.models import CheckIn
 
 
+'''define the rules of seeing habits or creating one'''
+
+
 @api_view(['GET', 'POST'])
 @permission_classes([IsAuthenticated])
 def habit_list_create(request):
@@ -35,6 +38,9 @@ def habit_list_create(request):
         serializer.errors,
         status=status.HTTP_400_BAD_REQUEST
     )
+
+
+'''define the rules of edit a habit'''
 
 
 @api_view(['GET', 'PUT', 'PATCH', 'DELETE'])
@@ -82,6 +88,9 @@ def habit_detail(request, pk):
         return Response(
             status=status.HTTP_204_NO_CONTENT
         )
+
+
+'''define the rules of seeing checkins of a habit or edit one'''
 
 
 @api_view(['GET', 'POST'])

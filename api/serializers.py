@@ -2,6 +2,8 @@ from rest_framework import serializers
 from habits.models import Habit
 from checkins.models import CheckIn
 
+'''define habit serializers rules and fields'''
+
 
 class HabitSerializer(serializers.ModelSerializer):
 
@@ -106,6 +108,9 @@ class HabitSerializer(serializers.ModelSerializer):
             })
 
         return attrs
+
+
+'''define checkins serializers rules and fields'''
 
 
 class CheckInSerializer(serializers.ModelSerializer):
