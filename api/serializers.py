@@ -4,6 +4,8 @@ from rest_framework import serializers
 from habits.models import Habit
 from checkins.models import CheckIn
 
+'''define rules and fields for create a user'''
+
 
 class RegisterSerializer(serializers.ModelSerializer):
     password = serializers.CharField(
